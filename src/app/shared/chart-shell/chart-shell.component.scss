@@ -1,0 +1,25 @@
+.chart-shell {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border, #1e1e38);
+  background: rgba(20, 20, 37, 0.82);
+}
+
+.chart-shell h3 {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
+  color: #ede8e0;
+}
+
+.chart-shell p {
+  margin: 0.2rem 0 0;
+  color: #8a8580;
+}
+
+.chart-host {
+  width: 100%;
+  height: clamp(16rem, 34vw, 25rem);
+}

@@ -1,0 +1,126 @@
+.cs-shell {
+  display: grid;
+  gap: 1rem;
+}
+
+.cs-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cs-tab {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-bright, #2e2e50);
+  border-radius: 0.35rem;
+  background: rgba(20, 20, 37, 0.6);
+  color: var(--text-dim, #8a8580);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cs-tab:hover {
+  border-color: var(--gold, #c9a84c);
+  color: var(--text, #ede8e0);
+}
+
+.cs-tab--active {
+  border-color: var(--gold, #c9a84c);
+  background: rgba(201, 168, 76, 0.12);
+  color: var(--gold, #c9a84c);
+}
+
+.cs-content {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+}
+
+.cs-narrative h3 {
+  margin: 0 0 0.6rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--text, #ede8e0);
+}
+
+.cs-text {
+  margin: 0;
+  color: var(--text-dim, #8a8580);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.cs-keyfact {
+  margin-top: 1rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: 0.35rem;
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--gold-bright, #f0c040);
+  font-size: 0.88rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.cs-keyfact__icon {
+  flex-shrink: 0;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  background: rgba(201, 168, 76, 0.25);
+  color: var(--gold, #c9a84c);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.cs-metrics {
+  display: grid;
+  gap: 0.9rem;
+  align-content: start;
+}
+
+.cs-metric__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.cs-metric__label {
+  color: var(--text-dim, #8a8580);
+  font-size: 0.78rem;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cs-metric__value {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.cs-metric__bar-bg {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border, #1e1e38);
+  overflow: hidden;
+}
+
+.cs-metric__bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@media (max-width: 720px) {
+  .cs-content {
+    grid-template-columns: 1fr;
+  }
+}

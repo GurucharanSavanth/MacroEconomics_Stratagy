@@ -1,0 +1,22 @@
+{
+  "series_id": "COFER_USD_ALLOCATED_SHARE",
+  "description": "USD share of allocated foreign exchange reserves (percent)",
+  "values": [
+    { "period": "2016-Q4", "value": 65.4 },
+    { "period": "2017-Q4", "value": 62.7 },
+    { "period": "2018-Q4", "value": 61.7 },
+    { "period": "2019-Q4", "value": 60.7 },
+    { "period": "2020-Q4", "value": 59.0 },
+    { "period": "2021-Q4", "value": 58.8 },
+    { "period": "2022-Q4", "value": 58.4 },
+    { "period": "2023-Q4", "value": 58.4 },
+    { "period": "2024-Q4", "value": 57.8 },
+    { "period": "2025-Q3", "value": 57.2 }
+  ],
+  "methodology_breaks": [
+    {
+      "period": "2025-Q3",
+      "note": "COFER publication revision removed unallocated reserves from published tables."
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "dataset_id": "IMF_COFER",
+  "as_of_utc": "2026-02-16T01:49:25.608Z",
+  "source": {
+    "publisher": "International Monetary Fund",
+    "method": "local_raw_reference",
+    "citation_url": "https://data.imf.org/en/Resource-Pages/IMF-API",
+    "license_notes": "IMF terms of use apply."
+  },
+  "raw_hash_sha256": "d2e05d5f2a8d273d8c6b348b4288ce5a4766e9807f58667a33afd0f9e7052fd3",
+  "transform_version": "1.1.0",
+  "raw_local_path": "data/raw/imf/cofer-fallback.json",
+  "data": {
+    "seriesId": "COFER_USD_ALLOCATED_SHARE",
+    "description": "USD share of allocated foreign exchange reserves (percent)",
+    "values": [
+      {
+        "period": "2016-Q4",
+        "value": 65.4
+      },
+      {
+        "period": "2017-Q4",
+        "value": 62.7
+      },
+      {
+        "period": "2018-Q4",
+        "value": 61.7
+      },
+      {
+        "period": "2019-Q4",
+        "value": 60.7
+      },
+      {
+        "period": "2020-Q4",
+        "value": 59
+      },
+      {
+        "period": "2021-Q4",
+        "value": 58.8
+      },
+      {
+        "period": "2022-Q4",
+        "value": 58.4
+      },
+      {
+        "period": "2023-Q4",
+        "value": 58.4
+      },
+      {
+        "period": "2024-Q4",
+        "value": 57.8
+      },
+      {
+        "period": "2025-Q3",
+        "value": 57.2
+      }
+    ],
+    "methodologyBreaks": [
+      {
+        "period": "2025-Q3",
+        "note": "COFER publication revision removed unallocated reserves from published tables."
+      }
+    ]
+  }
+}

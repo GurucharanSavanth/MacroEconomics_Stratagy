@@ -1,0 +1,766 @@
+@if (!snapshot()) {
+  <main class="atlas-loading">
+    <h1>Tightening Spillover Atlas</h1>
+    @if (atlasStore.error()) {
+      <p>Data load failed: {{ atlasStore.error() }}</p>
+    } @else {
+      <p>Loading build-time dataset snapshots...</p>
+    }
+  </main>
+} @else {
+  <div class="atlas-root">
+    <nav class="atlas-nav">
+      <div class="atlas-nav__brand">ECON / 2026</div>
+      <div class="atlas-nav__links">
+        <a href="#hero">Context</a>
+        <a href="#facts">Facts</a>
+        <a href="#timeline">Rates</a>
+        <a href="#sync">Data</a>
+        <a href="#channels">Channels</a>
+        <a href="#stress">Stress</a>
+        <a href="#cases">Cases</a>
+        <a href="#network">Network</a>
+        <a href="#methodology">Sources</a>
+      </div>
+    </nav>
+
+    <header class="atlas-header">
+      <div class="hero-bg"></div>
+      <div class="hero-gridlines"></div>
+
+      <div class="atlas-header__title">
+        <p class="atlas-kicker">Global Economic Spillovers · Build-time Atlas</p>
+        <h1>
+          <span class="line1">The Invisible</span>
+          <span class="line2">Earthquake.</span>
+        </h1>
+        <p class="atlas-header__subtitle">
+          How the fastest monetary tightening cycle in four decades sent shockwaves through developing economies —
+          triggering sovereign defaults, currency collapses, and a debt crisis affecting billions.
+        </p>
+        <p class="atlas-header__meta">
+          Data as of {{ snapshot().as_of_utc | date: 'medium' : 'UTC' }} · Build-time ETL snapshots only ·
+          Educational vulnerability lens
+        </p>
+
+        <div class="hero-stat-row">
+          @for (stat of heroStats; track stat.num) {
+            <div class="hero-stat">
+              <div class="num">{{ stat.num }}</div>
+              <div class="label">{{ stat.label }}</div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="atlas-header__controls">
+        <mat-button-toggle-group
+          [value]="mode()"
+          (change)="setMode($event.value)"
+          aria-label="Atlas mode"
+        >
+          <mat-button-toggle value="story">Story mode</mat-button-toggle>
+          <mat-button-toggle value="explore">Explore mode</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+
+      <div class="ticker-wrap">
+        <div class="ticker">
+          @for (item of tickerItems(); track $index) {
+            <span class="ticker-item">{{ item }} <span class="ticker-sep">&middot;</span></span>
+          }
+          @for (item of tickerItems(); track $index) {
+            <span class="ticker-item">{{ item }} <span class="ticker-sep">&middot;</span></span>
+          }
+        </div>
+      </div>
+    </header>
+
+    <main class="atlas-main">
+      @if (mode() === 'story') {
+        <aside class="story-rail">
+          @for (section of sectionOrder; track section.id) {
+            <button
+              mat-stroked-button
+              [class.story-rail__active]="activeSection() === section.id"
+              (click)="jumpTo(section.id)"
+            >
+              {{ section.label }}
+            </button>
+          }
+        </aside>
+      }
+
+      <div class="atlas-content">
+        <!-- ═══ SECTION 01: GLOBAL PULSE ═══ -->
+        <section id="hero" #atlasSection class="atlas-section atlas-section--hero">
+          <div class="hero-grid">
+            <div>
+              <div class="section-label"><span>01</span> Global Pulse</div>
+              <h2>The Global Tightening Pulse</h2>
+              <p>
+                Between March 2022 and July 2023, the Federal Reserve executed the most aggressive monetary tightening
+                cycle in four decades — raising rates 525 basis points in just 16 months. The shockwaves rippled across
+                every developing economy on Earth.
+              </p>
+            </div>
+            <div class="kpi-grid">
+              @for (kpi of sections().hero.kpis; track kpi.id) {
+                <article class="kpi-card" [matTooltip]="kpi.label">
+                  <p>{{ kpi.label }}</p>
+                  <strong>{{ kpi.value }} {{ kpi.unit }}</strong>
+                  <div class="kpi-sources">
+                    @for (source of sourceByIds(kpi.source_ids); track source.id) {
+                      <span class="source-chip">{{ source.id }}</span>
+                    }
+                  </div>
+                </article>
+              }
+            </div>
+          </div>
+
+          @if (sectionInterpretation('hero'); as note) {
+            <article class="interpretation-card">
+              <h3>{{ note.title }}</h3>
+              <ul>
+                @for (insight of note.insights; track insight) {
+                  <li>{{ insight }}</li>
+                }
+              </ul>
+            </article>
+          }
+
+          @if (interpretation()?.executive_summary?.length) {
+            <article class="economist-brief">
+              <h3>Economist Briefing</h3>
+              <ul>
+                @for (point of interpretation()?.executive_summary ?? []; track point) {
+                  <li>{{ point }}</li>
+                }
+              </ul>
+            </article>
+          }
+        </section>
+
+        <!-- ═══ SECTION 02: EXPLAINER ═══ -->
+        <section id="explainer" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>02</span> Mechanism</div>
+            <h2>What Is Monetary Tightening?</h2>
+            <p>
+              When the Federal Reserve raises interest rates, the effects don't stop at US borders. Through four
+              interconnected channels, tightening propagates globally — with developing countries bearing the heaviest
+              burden.
+            </p>
+          </div>
+
+          <div class="mechanism-grid">
+            @for (mech of explainerMechanisms; track mech.step) {
+              <article class="mechanism-card">
+                <div class="mechanism-step">{{ mech.step }}</div>
+                <h3>{{ mech.title }}</h3>
+                <p>{{ mech.description }}</p>
+              </article>
+            }
+          </div>
+        </section>
+
+        <!-- ═══ SECTION 03: KEY FACTS ═══ -->
+        <section id="facts" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>03</span> Key Facts</div>
+            <h2>The Numbers That Define the Crisis</h2>
+            <p>
+              Eight data points that capture the scale of the global tightening shock and its disproportionate impact on
+              developing economies.
+            </p>
+          </div>
+
+          @defer (on viewport) {
+            <app-key-facts [facts]="keyFacts" />
+          } @placeholder {
+            <div class="chart-placeholder">Loading facts...</div>
+          }
+        </section>
+
+        <!-- ═══ SECTION 04: RATE TIMELINE ═══ -->
+        <section id="timeline" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>04</span> Rate Timeline</div>
+            <h2>The Great Rate Divergence</h2>
+            <p>
+              Major central banks moved in near-lockstep upward — except the Bank of Japan. The synchronized tightening
+              created an unprecedented global liquidity squeeze.
+            </p>
+          </div>
+
+          @defer (on viewport) {
+            <app-chart-shell
+              title="Major Central Bank Policy Rates (2019-2024)"
+              subtitle="Federal Reserve, ECB, Bank of England, Bank of Japan quarterly policy rates"
+              [options]="rateTimelineOptions()"
+            />
+          } @placeholder {
+            <div class="chart-placeholder">Loading rate timeline...</div>
+          }
+
+          <article class="callout-card">
+            <h3>The Japan Exception</h3>
+            <p>
+              While every other major central bank raised rates aggressively, the Bank of Japan maintained negative
+              interest rates until March 2024 — creating a massive carry trade that amplified yen weakness and global
+              capital flow distortions.
+            </p>
+          </article>
+        </section>
+
+        <!-- ═══ SECTION 05: SYNCHRONIZATION ═══ -->
+        <section id="sync" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>05</span> Synchronization</div>
+            <h2>Global Synchronization</h2>
+            <p>
+              Heatmap and Tightening Synchronization Index (TSI) reveal clustering of policy-rate moves across central
+              banks.
+            </p>
+          </div>
+
+          @defer (on viewport) {
+            <app-chart-shell
+              title="A. Global Tightening Heatmap"
+              subtitle="Central banks &times; quarterly policy-rate levels"
+              [options]="heatmapOptions()"
+            />
+          } @placeholder {
+            <div class="chart-placeholder">Loading heatmap...</div>
+          }
+
+          @defer (on viewport) {
+            <app-chart-shell
+              title="B. Tightening Synchronization Index"
+              subtitle="Hiking/cutting shares and cross-country dispersion"
+              [options]="tsiOptions()"
+            />
+          } @placeholder {
+            <div class="chart-placeholder">Loading TSI...</div>
+          }
+
+          <div class="evidence-row">
+            @for (item of evidence().slice(0, 2); track item.id) {
+              <app-evidence-card
+                [title]="item.title"
+                [body]="item.body"
+                (open)="openEvidence(item.id)"
+              />
+            }
+          </div>
+
+          @if (sectionInterpretation('sync'); as note) {
+            <article class="interpretation-card">
+              <h3>{{ note.title }}</h3>
+              <ul>
+                @for (insight of note.insights; track insight) {
+                  <li>{{ insight }}</li>
+                }
+              </ul>
+            </article>
+          }
+        </section>
+
+        <!-- ═══ SECTION 06: TRANSMISSION CHANNELS ═══ -->
+        <section id="channels" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>06</span> Transmission</div>
+            <h2>Transmission Channels</h2>
+            <p>
+              Policy tightening transmits through FX funding, offshore credit, and dominant-currency pricing channels.
+            </p>
+          </div>
+
+          <mat-tab-group>
+            <mat-tab label="FX channel">
+              <div class="tab-pad">
+                @defer (on viewport) {
+                  <app-chart-shell
+                    title="C. Offshore USD Liquidity Trend"
+                    subtitle="BIS GLI indexed to base period"
+                    [options]="liquidityOptions()"
+                  />
+                } @placeholder {
+                  <div class="chart-placeholder">Loading GLI trend...</div>
+                }
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Funding channel">
+              <div class="tab-pad">
+                @defer (on viewport) {
+                  <app-chart-shell
+                    title="D. Spillover Mechanism Sankey"
+                    subtitle="Policy &rarr; dollar funding &rarr; debt stress"
+                    [options]="sankeyOptions()"
+                  />
+                } @placeholder {
+                  <div class="chart-placeholder">Loading spillover flow...</div>
+                }
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Trade pricing channel (DCP)">
+              <div class="tab-pad">
+                <app-chart-shell
+                  title="F. Dominant Currency Exposure"
+                  subtitle="COFER USD share with methodology break marker"
+                  [options]="dominantCurrencyOptions()"
+                />
+                <article class="callout-card">
+                  <h3>Non-obvious mechanism</h3>
+                  <p>
+                    Under the Dominant Currency Paradigm, trade contracts are frequently invoiced in USD even when the
+                    US is not a direct bilateral partner, amplifying global spillovers.
+                  </p>
+                  <button mat-stroked-button color="primary" (click)="openEvidence('ev-4')">View evidence</button>
+                </article>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+
+          @if (sectionInterpretation('channels'); as note) {
+            <article class="interpretation-card">
+              <h3>{{ note.title }}</h3>
+              <ul>
+                @for (insight of note.insights; track insight) {
+                  <li>{{ insight }}</li>
+                }
+              </ul>
+            </article>
+          }
+        </section>
+
+        <!-- ═══ SECTION 07: SPILLOVER TIERS ═══ -->
+        <section id="tiers" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>07</span> Spillover Tiers</div>
+            <h2>Cascading Impact: Four Tiers of Vulnerability</h2>
+            <p>
+              Not all developing countries were affected equally. The tightening cycle sorted nations into four tiers of
+              impact — from sovereign default to managed absorption.
+            </p>
+          </div>
+
+          @defer (on viewport) {
+            <app-spillover-tiers [tiers]="spilloverTiers" />
+          } @placeholder {
+            <div class="chart-placeholder">Loading tiers...</div>
+          }
+
+          <article class="callout-card">
+            <h3>The Debt Distress Threshold</h3>
+            <p>
+              Countries with debt service ratios above 25% of exports and USD-denominated debt exceeding 60% were most
+              vulnerable to the tightening cycle. The combination of rising rates and dollar strength created a
+              compounding effect that pushed 25 countries into distress.
+            </p>
+          </article>
+        </section>
+
+        <!-- ═══ SECTION 08: CURRENCY DEPRECIATION ═══ -->
+        <section id="depreciation" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>08</span> Currency Shock</div>
+            <h2>Currency Depreciation & Capital Flight</h2>
+            <p>
+              As the dollar surged to a 20-year high, emerging market currencies bore the brunt. Capital fled to the
+              safety of US treasuries, leaving developing countries with depleted reserves and ballooning import costs.
+            </p>
+          </div>
+
+          <div class="dual-chart-grid">
+            @defer (on viewport) {
+              <app-chart-shell
+                title="Currency Depreciation vs USD (2022-2023)"
+                subtitle="Peak depreciation for most-affected emerging market currencies"
+                [options]="depreciationBarOptions()"
+              />
+            } @placeholder {
+              <div class="chart-placeholder">Loading depreciation chart...</div>
+            }
+
+            @defer (on viewport) {
+              <app-chart-shell
+                title="EM Capital Outflows Composition ($83B total, 2022)"
+                subtitle="Breakdown of capital outflows from emerging markets"
+                [options]="capitalFlowDonutOptions()"
+              />
+            } @placeholder {
+              <div class="chart-placeholder">Loading capital flows...</div>
+            }
+          </div>
+        </section>
+
+        <!-- ═══ SECTION 09: COUNTRY STRESS ═══ -->
+        <section id="stress" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>09</span> Stress Lens</div>
+            <h2>Developing Country Stress Lens</h2>
+            <p>
+              Cross-country scatter links debt service burden with USD debt composition for structural vulnerability
+              mapping.
+            </p>
+          </div>
+
+          @if (mode() === 'explore') {
+            <div class="explore-controls">
+              <label>
+                Region
+                <select [value]="selectedRegion()" (change)="setRegion($any($event.target).value)">
+                  @for (region of regionOptions(); track region) {
+                    <option [value]="region">{{ region }}</option>
+                  }
+                </select>
+              </label>
+
+              <label>
+                Year
+                <select [value]="selectedYear()" (change)="setYearFromInput($any($event.target).value)">
+                  @for (year of availableYears(); track year) {
+                    <option [value]="year">{{ year }}</option>
+                  }
+                </select>
+              </label>
+            </div>
+          }
+
+          @defer (on viewport) {
+            <app-chart-shell
+              title="E. Debt Stress Scatter"
+              subtitle="Debt service ratio vs USD debt share"
+              [options]="stressScatterOptions()"
+            />
+          } @placeholder {
+            <div class="chart-placeholder">Loading stress scatter...</div>
+          }
+
+          <article class="table-card">
+            <h3>Top stress exposures (selected year)</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Country</th>
+                  <th>Region</th>
+                  <th>Debt service</th>
+                  <th>USD share</th>
+                  <th>Stress score</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of stressRanking(); track row.iso3) {
+                  <tr>
+                    <td>{{ row.country }}</td>
+                    <td>{{ row.region }}</td>
+                    <td>{{ row.debtService | number: '1.1-1' }}</td>
+                    <td>{{ row.usdDebtShare | number: '1.1-1' }}</td>
+                    <td>{{ row.stressScore | number: '1.1-1' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </article>
+
+          <article class="simulator-card">
+            <h3>Tightening Shock Simulator (educational)</h3>
+            <p>{{ sections().simulator.explanation }}</p>
+            <label>
+              Global tightening intensity: <strong>{{ shockIntensity() }}</strong>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                [value]="shockIntensity()"
+                (input)="setShockIntensity($any($event.target).value)"
+              />
+            </label>
+            <ul>
+              @for (row of simulationRanking(); track row.iso3) {
+                <li>
+                  {{ row.country }} &middot; simulated score {{ row.simulatedStress | number: '1.1-1' }}
+                </li>
+              }
+            </ul>
+          </article>
+
+          @if (sectionInterpretation('stress'); as note) {
+            <article class="interpretation-card">
+              <h3>{{ note.title }}</h3>
+              <ul>
+                @for (insight of note.insights; track insight) {
+                  <li>{{ insight }}</li>
+                }
+              </ul>
+            </article>
+          }
+        </section>
+
+        <!-- ═══ SECTION 10: CASE STUDIES ═══ -->
+        <section id="cases" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>10</span> Case Studies</div>
+            <h2>Five Countries, Five Crises</h2>
+            <p>
+              From Sri Lanka's sovereign default to Turkey's heterodox experiment — each case study reveals how the
+              global tightening cycle interacted with local vulnerabilities to produce distinct crisis patterns.
+            </p>
+          </div>
+
+          @defer (on viewport) {
+            <app-case-studies [studies]="caseStudies" />
+          } @placeholder {
+            <div class="chart-placeholder">Loading case studies...</div>
+          }
+        </section>
+
+        <!-- ═══ SECTION 11: NETWORK CORE ═══ -->
+        <section id="network" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>11</span> Network Core</div>
+            <h2>Currency Network Core</h2>
+            <p>
+              A small set of currencies forms a central network core, accelerating the propagation of monetary shocks.
+            </p>
+          </div>
+
+          @defer (on viewport) {
+            <app-currency-network
+              [nodes]="sections().currency_network.nodes"
+              [links]="sections().currency_network.links"
+            />
+          } @placeholder {
+            <div class="chart-placeholder">Loading network graph...</div>
+          }
+
+          @if (sectionInterpretation('network'); as note) {
+            <article class="interpretation-card">
+              <h3>{{ note.title }}</h3>
+              <ul>
+                @for (insight of note.insights; track insight) {
+                  <li>{{ insight }}</li>
+                }
+              </ul>
+            </article>
+          }
+        </section>
+
+        <!-- ═══ SECTION 12: SPILLBACK LOOP ═══ -->
+        <section id="spillback" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>12</span> Spillback Loop</div>
+            <h2>The Feedback Loop: How Spillovers Spill Back</h2>
+            <p>
+              Monetary tightening doesn't flow in one direction. When developing countries destabilize, the effects
+              reverberate back to advanced economies through trade, banking, and confidence channels.
+            </p>
+          </div>
+
+          @defer (on viewport) {
+            <app-spillback-loop [steps]="spillbackSteps" />
+          } @placeholder {
+            <div class="chart-placeholder">Loading spillback diagram...</div>
+          }
+
+          <article class="spillback-note">
+            <h3>The Spillback Cost</h3>
+            <p>
+              The Peterson Institute estimates that US monetary tightening spillovers reduced US export demand by
+              approximately $45 billion through 2023 as developing country growth collapsed. The global economy is a
+              system — there is no tightening without consequence.
+            </p>
+          </article>
+        </section>
+
+        <!-- ═══ SECTION 13: METHODOLOGY ═══ -->
+        <section id="methodology" #atlasSection class="atlas-section">
+          <div class="section-head">
+            <div class="section-label"><span>13</span> Methodology</div>
+            <h2>Methodology and Sources</h2>
+            <p>
+              Every chart is generated from build-time snapshots with source metadata, retrieval timestamps, and
+              checksums.
+            </p>
+          </div>
+
+          <!-- Rich source references -->
+          <div class="source-list">
+            @for (src of richSources; track src.id) {
+              <article>
+                <h3>{{ src.title }}</h3>
+                <p>{{ src.publisher }} ({{ src.year }})</p>
+                <a [href]="src.url" target="_blank" rel="noopener">{{ src.url }}</a>
+              </article>
+            }
+          </div>
+
+          <mat-accordion>
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Executive interpretation</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <ul>
+                @for (item of interpretation()?.executive_summary ?? []; track item) {
+                  <li>{{ item }}</li>
+                }
+              </ul>
+
+              @if (sectionInterpretation('methodology'); as note) {
+                <article class="interpretation-card interpretation-card--inline">
+                  <h3>{{ note.title }}</h3>
+                  <ul>
+                    @for (insight of note.insights; track insight) {
+                      <li>{{ insight }}</li>
+                    }
+                  </ul>
+                </article>
+              }
+            </mat-expansion-panel>
+
+            <mat-expansion-panel expanded>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Dataset caveats</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <ul>
+                @for (caveat of methodology().caveats; track caveat) {
+                  <li>{{ caveat }}</li>
+                }
+              </ul>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Data artifacts and lineage</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="artifact-summary">
+                <p>Total artifacts: <strong>{{ artifactSummary().total }}</strong></p>
+                <p>Healthy: <strong>{{ artifactSummary().ok }}</strong></p>
+                <p>Failed: <strong>{{ artifactSummary().failed }}</strong></p>
+              </div>
+
+              <div class="artifact-controls">
+                <label>
+                  Status
+                  <select [value]="artifactStatus()" (change)="setArtifactStatus($any($event.target).value)">
+                    <option value="all">All</option>
+                    <option value="ok">OK</option>
+                    <option value="failed">Failed</option>
+                  </select>
+                </label>
+
+                <label>
+                  Category
+                  <select [value]="artifactCategory()" (change)="setArtifactCategory($any($event.target).value)">
+                    @for (category of artifactCategories(); track category) {
+                      <option [value]="category">{{ category }}</option>
+                    }
+                  </select>
+                </label>
+
+                <a mat-stroked-button href="assets/data/atlas.json" download>Download atlas snapshot</a>
+              </div>
+
+              <div class="table-scroll">
+                <table class="artifact-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Source</th>
+                      <th>Category</th>
+                      <th>Status</th>
+                      <th>Path</th>
+                      <th>Size (bytes)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (artifact of filteredArtifacts(); track artifact.id) {
+                      <tr>
+                        <td>{{ artifact.id }}</td>
+                        <td>{{ artifact.sourceId }}</td>
+                        <td>{{ artifact.category }}</td>
+                        <td>{{ artifact.status }}</td>
+                        <td>{{ artifact.localPath }}</td>
+                        <td>{{ artifact.sizeBytes ?? 'n/a' }}</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>API health checks</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              @if (apiHealth()?.checks?.length) {
+                <div class="table-scroll">
+                  <table class="artifact-table">
+                    <thead>
+                      <tr>
+                        <th>Endpoint</th>
+                        <th>Status</th>
+                        <th>HTTP</th>
+                        <th>Elapsed (ms)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (check of apiHealth()?.checks ?? []; track check.id) {
+                        <tr>
+                          <td>{{ check.id }}</td>
+                          <td>{{ check.ok ? 'OK' : 'FAIL' }}</td>
+                          <td>{{ check.status ?? 'n/a' }}</td>
+                          <td>{{ check.elapsedMs ?? 'n/a' }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              } @else {
+                <p>No API health report found yet. Run <code>npm run data:verify</code> to generate one.</p>
+              }
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Methodology breaks</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <ul>
+                @for (breakPoint of methodology().breaks; track breakPoint.period) {
+                  <li>{{ breakPoint.period }} &middot; {{ breakPoint.note }}</li>
+                }
+              </ul>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Source backbone</mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <div class="source-list">
+                @for (source of sources(); track source.id) {
+                  <article>
+                    <h3>{{ source.id }} &middot; {{ source.title }}</h3>
+                    <p>{{ source.publisher }}</p>
+                    <p>Retrieved {{ source.retrieved_at_utc | date: 'medium' : 'UTC' }}</p>
+                    <a [href]="source.citation_url" target="_blank" rel="noopener">{{ source.citation_url }}</a>
+                  </article>
+                }
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </section>
+      </div>
+    </main>
+  </div>
+}

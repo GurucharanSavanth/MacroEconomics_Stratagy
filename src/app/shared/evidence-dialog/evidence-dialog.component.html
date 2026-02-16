@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{ data.evidence.title }}</h2>
+<mat-dialog-content>
+  <p class="evidence-body">{{ data.evidence.body }}</p>
+
+  <section class="source-list">
+    @for (source of data.sources; track source.id) {
+      <article class="source-item">
+        <h3>{{ source.title }}</h3>
+        <p>{{ source.publisher }}</p>
+        <p>Retrieved: {{ source.retrieved_at_utc | date: 'medium' : 'UTC' }}</p>
+        <mat-chip-set>
+          @for (series of source.series; track series) {
+            <mat-chip>{{ series }}</mat-chip>
+          }
+        </mat-chip-set>
+        <a [href]="source.citation_url" target="_blank" rel="noopener">Open source</a>
+      </article>
+    }
+  </section>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close color="primary">Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.evidence-body {
+  margin: 0 0 1rem;
+  color: #ede8e0;
+}
+
+.source-list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.source-item {
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid #2e2e50;
+  background: rgba(15, 15, 28, 0.7);
+}
+
+.source-item h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #ede8e0;
+}
+
+.source-item p {
+  margin: 0.3rem 0;
+  color: #8a8580;
+}
+
+.source-item a {
+  color: #00c9a7;
+}

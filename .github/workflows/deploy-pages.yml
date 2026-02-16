@@ -1,0 +1,64 @@
+name: Deploy Atlas to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Verify Data Source Reachability
+        run: npm run data:verify
+        continue-on-error: true
+
+      - name: Download Raw Source Caches
+        run: npm run data:download
+        continue-on-error: true
+
+      - name: Build Data Snapshots
+        run: npm run data:build
+
+      - name: Build App for GitHub Pages
+        run: npm run build:gh
+
+      - name: Generate GitHub Pages SPA fallback and .nojekyll
+        run: npm run postbuild:gh
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist/macro-tightening-atlas/browser
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

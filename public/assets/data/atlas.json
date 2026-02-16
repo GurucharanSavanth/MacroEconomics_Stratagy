@@ -1,0 +1,4271 @@
+{
+  "atlas_id": "tightening-spillover-atlas",
+  "title": "Global monetary tightening and its spillover effects on developing countries",
+  "as_of_utc": "2026-02-16T01:49:25.608Z",
+  "generated_at_utc": "2026-02-16T01:49:25.608Z",
+  "transform_version": "1.1.0",
+  "notes": [
+    "Build-time ETL snapshots are used to avoid browser API calls and improve reproducibility.",
+    "Charts are educational and descriptive; they are not forecasting tools.",
+    "Local raw artifacts from BIS/World Bank/IMF are ingested when available in data/raw."
+  ],
+  "sources": [
+    {
+      "id": "BIS_CBPOL",
+      "title": "BIS Policy Rates (CBPOL)",
+      "publisher": "Bank for International Settlements",
+      "citation_url": "https://data.bis.org/bulkdownload",
+      "retrieved_at_utc": "2026-02-16T01:49:25.608Z",
+      "series": [
+        "Policy rates by central bank",
+        "Meeting-history aligned monthly/quarterly transforms"
+      ]
+    },
+    {
+      "id": "BIS_GLI",
+      "title": "BIS Global Liquidity Indicators (GLI)",
+      "publisher": "Bank for International Settlements",
+      "citation_url": "https://data.bis.org/bulkdownload",
+      "retrieved_at_utc": "2026-02-16T01:49:25.608Z",
+      "series": [
+        "USD/EUR/JPY credit to EME non-banks (indexed)"
+      ]
+    },
+    {
+      "id": "WB_IDS",
+      "title": "World Bank debt indicators (IDS/WDI API)",
+      "publisher": "World Bank",
+      "citation_url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation",
+      "retrieved_at_utc": "2026-02-16T01:49:25.608Z",
+      "series": [
+        "DT.TDS.DECT.EX.ZS (Total debt service / exports)",
+        "DT.INT.DECT.EX.ZS (Interest payments / exports)",
+        "DT.CUR.USDL.ZS (USD currency composition of PPG debt, WLD counterpart)"
+      ]
+    },
+    {
+      "id": "IMF_COFER",
+      "title": "IMF COFER reserve composition reference",
+      "publisher": "International Monetary Fund",
+      "citation_url": "https://data.imf.org/en/Resource-Pages/IMF-API",
+      "retrieved_at_utc": "2026-02-16T01:49:25.608Z",
+      "series": [
+        "USD share of allocated reserves"
+      ],
+      "notes": [
+        "2025-Q3 publication revision reflected in methodology break annotation."
+      ]
+    },
+    {
+      "id": "DCP",
+      "title": "Dominant Currency Paradigm concept note",
+      "publisher": "BIS / IMF working literature",
+      "citation_url": "https://www.bis.org/publ/work783.htm",
+      "retrieved_at_utc": "2026-02-16T01:49:25.608Z",
+      "series": [
+        "Conceptual anchor for trade invoicing and transmission channels"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-1",
+      "title": "Tightening synchronization wave",
+      "body": "The TSI panel tracks the share of tracked central banks that are hiking versus cutting each quarter.",
+      "source_ids": [
+        "BIS_CBPOL"
+      ]
+    },
+    {
+      "id": "ev-2",
+      "title": "Offshore liquidity as transmission channel",
+      "body": "GLI series track international credit in major currencies to non-residents, a direct spillover channel.",
+      "source_ids": [
+        "BIS_GLI"
+      ]
+    },
+    {
+      "id": "ev-3",
+      "title": "Debt stress and USD debt exposure",
+      "body": "Debt service burden and USD debt composition jointly capture structural refinancing vulnerability.",
+      "source_ids": [
+        "WB_IDS"
+      ]
+    },
+    {
+      "id": "ev-4",
+      "title": "COFER methodology break",
+      "body": "Reserve-share trend line includes a flagged break at 2025-Q3 for publication revision awareness.",
+      "source_ids": [
+        "IMF_COFER"
+      ]
+    }
+  ],
+  "methodology": {
+    "as_of_utc": "2026-02-16T01:49:25.608Z",
+    "breaks": [
+      {
+        "period": "2025-Q3",
+        "note": "COFER publication revision removed unallocated reserves from published tables."
+      }
+    ],
+    "caveats": [
+      "Country coverage is constrained to economies with complete series in the selected period.",
+      "CBPOL meeting-frequency data are quarter-normalized using observed quarter-end values.",
+      "WB USD composition series uses IDS source API with counterpart-area WLD.",
+      "The simulator is a vulnerability lens, not a predictive model."
+    ]
+  },
+  "interpretation": {
+    "executive_summary": [
+      "The latest quarter (2026-Q1) shows 0% of tracked central banks hiking and 5.9% cutting.",
+      "Average developing-country stress score is 45.1, with 11 economies above that benchmark in the latest year.",
+      "USD offshore liquidity remains above peer currencies by -3.5 index points, reinforcing dollar funding spillovers.",
+      "The top observed stress exposures are Colombia, Argentina, Pakistan, while COFER USD allocated reserve share is 57.2%."
+    ],
+    "section_notes": [
+      {
+        "section_id": "hero",
+        "title": "Pulse interpretation",
+        "insights": [
+          "Tracked central banks: 34.",
+          "Latest median policy-rate move: 0 pp; dispersion: 0 pp."
+        ],
+        "source_ids": [
+          "BIS_CBPOL"
+        ]
+      },
+      {
+        "section_id": "sync",
+        "title": "Synchronization interpretation",
+        "insights": [
+          "Latest quarter hiking share change versus prior quarter: -2.8 percentage points.",
+          "Synchronous shifts indicate shared reaction to global inflation and financing conditions."
+        ],
+        "source_ids": [
+          "BIS_CBPOL"
+        ]
+      },
+      {
+        "section_id": "channels",
+        "title": "Transmission interpretation",
+        "insights": [
+          "USD liquidity index exceeds EUR/JPY mean by -3.5 points in the latest observation.",
+          "This supports a funding-channel narrative where dollar conditions tighten broader external financing."
+        ],
+        "source_ids": [
+          "BIS_GLI",
+          "DCP"
+        ]
+      },
+      {
+        "section_id": "stress",
+        "title": "Country stress interpretation",
+        "insights": [
+          "Coverage includes 19 developing economies with annual debt-service and currency-composition profiles.",
+          "Cross-country means: debt service 22% of exports; USD debt share 79.7%."
+        ],
+        "source_ids": [
+          "WB_IDS"
+        ]
+      },
+      {
+        "section_id": "network",
+        "title": "Network-core interpretation",
+        "insights": [
+          "A concentrated currency core can transmit tightening rapidly through multi-hop funding relationships.",
+          "Periphery currencies are connected through core hubs, not only bilateral channels."
+        ],
+        "source_ids": [
+          "BIS_GLI",
+          "DCP"
+        ]
+      },
+      {
+        "section_id": "methodology",
+        "title": "Methodology interpretation",
+        "insights": [
+          "All chart inputs are generated at build-time and captured in dataset lineage with hashes.",
+          "A 2025-Q3 COFER break is explicitly flagged to prevent false trend inferences across methodology changes."
+        ],
+        "source_ids": [
+          "IMF_COFER",
+          "WB_IDS",
+          "BIS_CBPOL"
+        ]
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "BIS_CBPOL_CSV_CACHE",
+      "sourceId": "BIS_CBPOL",
+      "category": "raw-cache",
+      "localPath": "data/raw/bis/WS_CBPOL_csv_col.csv",
+      "description": "BIS_CBPOL cached CSV used after fetch failure",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 5479425,
+      "sha256": "72c08fffe74c8b32223744bedf13425dfac404faa93435a8dd8b1b3db7ccbb89",
+      "capturedAtUtc": "2026-02-15T18:09:43.622Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "BIS_GLI_CSV_CACHE",
+      "sourceId": "BIS_GLI",
+      "category": "raw-cache",
+      "localPath": "data/raw/bis/WS_GLI_csv_col.csv",
+      "description": "BIS_GLI cached CSV used after fetch failure",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 283839,
+      "sha256": "5eb242e97ac6bc90a0dd9f1a021ab1bd1f7d9f0d60c2181500c508e39d7f2cd2",
+      "capturedAtUtc": "2026-02-15T18:09:44.989Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_BRA_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/BRA_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS BRA DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39285,
+      "sha256": "1d03ad04f5629b319eb1e6f0f1fe7355b0cd7061a5f5b21cd8c4cd579461e7dd",
+      "capturedAtUtc": "2026-02-15T18:09:46.372Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_BRA_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/BRA_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS BRA DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40293,
+      "sha256": "0b68a684b69ebb406778f5183e4fff543079d3711cd94f0846b4a9ee5f178ac4",
+      "capturedAtUtc": "2026-02-15T18:09:47.750Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_BRA_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/BRA_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS BRA DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37333,
+      "sha256": "030d3b82339750ae3497d6e7f415c2d8d3ff9191e6d17253b7aeb9138136342d",
+      "capturedAtUtc": "2026-02-15T18:09:49.114Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_MEX_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/MEX_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS MEX DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39231,
+      "sha256": "0e4d902f95d33b857d355738c463333de1c804be3e70bcda4e75b367d9d66cee",
+      "capturedAtUtc": "2026-02-15T18:09:50.480Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_MEX_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/MEX_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS MEX DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40240,
+      "sha256": "47bb53716e269c9533c8f8325bd732eacb74c98ffa57249959e5f380c7d45bce",
+      "capturedAtUtc": "2026-02-15T18:09:51.872Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_MEX_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/MEX_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS MEX DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37330,
+      "sha256": "ea7d76c7db356aeaaf08c843aa70911eba0d5c1017515c1f79c0dec2453fbe4a",
+      "capturedAtUtc": "2026-02-15T18:09:53.251Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_COL_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/COL_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS COL DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39464,
+      "sha256": "12f57591a14f45eaad7da36595116608c17b1cdc1d4f2eece7425d9e9a472663",
+      "capturedAtUtc": "2026-02-15T18:09:54.630Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_COL_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/COL_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS COL DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40475,
+      "sha256": "360ff55aa75fcdc4d4544351ab5e3140cbf97fd25ab5c745746fbfdc6117472e",
+      "capturedAtUtc": "2026-02-15T18:09:56.009Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_COL_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/COL_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS COL DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37459,
+      "sha256": "d785c76ce45633301258275ee8e81f60c807aeeb980591045aa0703fe107de05",
+      "capturedAtUtc": "2026-02-15T18:09:57.386Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PER_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PER_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS PER DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39131,
+      "sha256": "51446cd3bd19b6d02b6825d69a97392fe3e190c103da40298525dd24f91005ea",
+      "capturedAtUtc": "2026-02-15T18:09:58.764Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PER_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PER_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS PER DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40139,
+      "sha256": "f855255f759181951af1f538b7cad41257057032787a58a1d504c8dbffc8b62b",
+      "capturedAtUtc": "2026-02-15T18:10:00.145Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PER_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PER_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS PER DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37195,
+      "sha256": "480dbb09f08be5bd080cc15403b205fcfb60519a15e7a26b05d4dcf0c368a198",
+      "capturedAtUtc": "2026-02-15T18:10:01.510Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_ARG_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/ARG_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS ARG DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39459,
+      "sha256": "805fe9e2dd3966587ecdbb19a0c46d3d0763d03adf66c9c499692c06d170d672",
+      "capturedAtUtc": "2026-02-15T18:10:02.889Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_ARG_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/ARG_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS ARG DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40467,
+      "sha256": "bc07c32a47b0935b6beea0f9595cdd7012b1d17405932bd2a464c649e392999b",
+      "capturedAtUtc": "2026-02-15T18:10:04.280Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_ARG_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/ARG_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS ARG DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37516,
+      "sha256": "ef5ceb163b5e9326ae815bf4812a011243d5242dd340d65c3e5a1edd2a2efa38",
+      "capturedAtUtc": "2026-02-15T18:10:05.658Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_ZAF_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/ZAF_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS ZAF DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39435,
+      "sha256": "75014d6ce70a3337db17de60b4c40116667486f177e773a8e5dc20c8dec8b1c7",
+      "capturedAtUtc": "2026-02-15T18:10:07.037Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_ZAF_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/ZAF_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS ZAF DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40441,
+      "sha256": "faa67bf0c353c150f5dd4f7529f036c36cfef961906ce1227fba74ee72fb10a4",
+      "capturedAtUtc": "2026-02-15T18:10:08.416Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_ZAF_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/ZAF_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS ZAF DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37640,
+      "sha256": "0eb6fead22747ac2807f41d48a3c5255dbc0644968d1ab8d145ce5b1b5724514",
+      "capturedAtUtc": "2026-02-15T18:10:09.790Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_EGY_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/EGY_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS EGY DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39884,
+      "sha256": "26f97fc5300f0f320656d6a3672ed6d837bb1bef8a19e27a0ab7c51fc12ee6be",
+      "capturedAtUtc": "2026-02-15T18:10:11.167Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_EGY_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/EGY_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS EGY DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40895,
+      "sha256": "87e5041f341079da93e75b703c6b2040300e94a3e577c7659b8b3f4a09bc5812",
+      "capturedAtUtc": "2026-02-15T18:10:12.545Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_EGY_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/EGY_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS EGY DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37966,
+      "sha256": "f760d8fe4c9a730d93da11097f3937a3e8d8d0e5db8ae91764bc1b871903cfac",
+      "capturedAtUtc": "2026-02-15T18:10:13.924Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_NGA_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/NGA_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS NGA DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39324,
+      "sha256": "bcd1e65510348da7160bef35239eefc40da9b53f6325d2ef798f7d17ff20a28e",
+      "capturedAtUtc": "2026-02-15T18:10:15.297Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_NGA_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/NGA_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS NGA DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40338,
+      "sha256": "8b10f1709e4c89002b3cf5c168eb6a0d634df2a4a5e3b214c15cd3fa1e5b4a1b",
+      "capturedAtUtc": "2026-02-15T18:10:16.671Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_NGA_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/NGA_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS NGA DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37392,
+      "sha256": "4559f071e190a18c85aef032dddd314f45795703b1b511fdcc2c07e20de4a0b2",
+      "capturedAtUtc": "2026-02-15T18:10:18.044Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_MAR_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/MAR_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS MAR DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39344,
+      "sha256": "1330e7c8a7a137ac6e3552a75675c02ba52842b81c1d83f577c6e69adb37e985",
+      "capturedAtUtc": "2026-02-15T18:10:19.408Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_MAR_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/MAR_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS MAR DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40350,
+      "sha256": "330ba78ebc24765a85d1c9ff729361aabcc682cfa4d503159c1e5fbaae989976",
+      "capturedAtUtc": "2026-02-15T18:10:20.773Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_MAR_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/MAR_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS MAR DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37396,
+      "sha256": "5537bffbecbb750fa3f8bf208bdc691991a14de2ff11736b67f2e46814685318",
+      "capturedAtUtc": "2026-02-15T18:10:22.137Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_KEN_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/KEN_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS KEN DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39219,
+      "sha256": "e47cc5b1869e25945d0197b4d814bceb4f0f6cd4cbf4db80e949a59e1c706e8a",
+      "capturedAtUtc": "2026-02-15T18:10:23.499Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_KEN_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/KEN_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS KEN DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40228,
+      "sha256": "f44cd7ddff7f863b008b1988b7b3af820cc5690ebdf64ef050fc6bd4a45a28c7",
+      "capturedAtUtc": "2026-02-15T18:10:24.875Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_KEN_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/KEN_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS KEN DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37273,
+      "sha256": "59f75f22ec5a1daad5f0d8026c3c9f5507c1534eed00e283fb91f10ca4e79b08",
+      "capturedAtUtc": "2026-02-15T18:10:26.254Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_TUR_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/TUR_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS TUR DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39354,
+      "sha256": "44204f6685e660774084f6e7e4d7f19a21583119341ae4064639cce8ec0611ed",
+      "capturedAtUtc": "2026-02-15T18:10:27.626Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_TUR_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/TUR_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS TUR DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40361,
+      "sha256": "e31e1b3dbaf8808062d8fb2a8770b2a36d39d3fba08d7a2f2d4620a60ead6b6d",
+      "capturedAtUtc": "2026-02-15T18:10:29.011Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_TUR_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/TUR_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS TUR DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37397,
+      "sha256": "e534cb7afe0d35d527accf445f236f8c85abdac1dc65dbfdf277fd90e54f1bed",
+      "capturedAtUtc": "2026-02-15T18:10:30.387Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_UKR_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/UKR_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS UKR DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39116,
+      "sha256": "ef227012694e3196002a0f7f0afbb6dffe642d07f3b227f0358f62488a637cdc",
+      "capturedAtUtc": "2026-02-15T18:10:31.755Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_UKR_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/UKR_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS UKR DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40128,
+      "sha256": "42eaec9c841b410e9287d6e5e0cd9d70952195165dd42656da7926f209a0bec2",
+      "capturedAtUtc": "2026-02-15T18:10:33.134Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_UKR_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/UKR_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS UKR DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37329,
+      "sha256": "d752f6a1fc28739dd93a9653668b039265dd44ad6db11b97ff33486156892c86",
+      "capturedAtUtc": "2026-02-15T18:10:34.498Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_IND_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/IND_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS IND DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39215,
+      "sha256": "0837e0e58790b3364b626197fd7d69ad25c5b87aec7ff3ee9b70d0987e4c5341",
+      "capturedAtUtc": "2026-02-15T18:10:35.883Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_IND_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/IND_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS IND DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40224,
+      "sha256": "b04952c57abd5fa92aae85756bbf58148ec0b5e06de49d1e6916a3eba2392d1e",
+      "capturedAtUtc": "2026-02-15T18:10:37.266Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_IND_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/IND_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS IND DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37266,
+      "sha256": "1fa6c444f232fae4cbb102fe1dad85ce888ab371025f0a13307a42336776b1c1",
+      "capturedAtUtc": "2026-02-15T18:10:38.630Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_IDN_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/IDN_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS IDN DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39400,
+      "sha256": "170f457761fd5e54d2a58ef93f307d0e7cbe1dd3229232588179eec0088377dd",
+      "capturedAtUtc": "2026-02-15T18:10:39.995Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_IDN_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/IDN_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS IDN DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40407,
+      "sha256": "37ccd3414d68868a55aeac085f78093e75d0bd77ebca7b4636640481a93d7c3d",
+      "capturedAtUtc": "2026-02-15T18:10:41.357Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_IDN_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/IDN_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS IDN DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37520,
+      "sha256": "91b3f925dc8491b4ca757fcdf4c09994aef8d091aeb0c3214cea52d54e71cdb0",
+      "capturedAtUtc": "2026-02-15T18:10:42.748Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PHL_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PHL_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS PHL DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39568,
+      "sha256": "7a8584bd3cd5e026fdebfe78926de0dbe5433636c8b72755cad1c19dbccf368e",
+      "capturedAtUtc": "2026-02-15T18:10:44.111Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PHL_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PHL_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS PHL DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40576,
+      "sha256": "a08068bfb88ad1dfa12312795e8930c6743f688768eb954dfe445094795ef583",
+      "capturedAtUtc": "2026-02-15T18:10:45.491Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PHL_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PHL_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS PHL DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37646,
+      "sha256": "8234e1bb9a8a8a3bc87a6f0ca77ffe937b53c500190f63224db80b1d9a050351",
+      "capturedAtUtc": "2026-02-15T18:10:46.879Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_THA_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/THA_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS THA DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39408,
+      "sha256": "0045f66151e6cf8ec196b2d880c76ee63abcd4b09a0c01eddc495b59448df4cd",
+      "capturedAtUtc": "2026-02-15T18:10:48.261Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_THA_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/THA_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS THA DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40432,
+      "sha256": "37fba416356ffba6c3c1c5b0328b7b3852b70325a4f66123fe55a0a12dcd5b6d",
+      "capturedAtUtc": "2026-02-15T18:10:49.644Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_THA_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/THA_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS THA DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37459,
+      "sha256": "73e47da8fec3eb76d3247923dd3c7f35392870dc2260c632003ffe229b9b0bad",
+      "capturedAtUtc": "2026-02-15T18:10:51.029Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_VNM_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/VNM_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS VNM DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39159,
+      "sha256": "b6b106654095dec7e45ecb29b9d5e7b5f850d42db5908695d662c44bd576f411",
+      "capturedAtUtc": "2026-02-15T18:10:52.413Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_VNM_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/VNM_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS VNM DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40176,
+      "sha256": "206cacab7ec796f0d548dedb3efa804d834d88afb85bc59cda662de68ddb31a4",
+      "capturedAtUtc": "2026-02-15T18:10:53.799Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_VNM_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/VNM_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS VNM DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37393,
+      "sha256": "a2ab6f12a3d553e282379d21025a5de17e60a3f1424be642a29f6e1290fb1c16",
+      "capturedAtUtc": "2026-02-15T18:10:55.176Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PAK_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PAK_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS PAK DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39391,
+      "sha256": "b12d1788c29c22d9d9fd2f9aa99b0d2506aad530c025cb955000db402b217623",
+      "capturedAtUtc": "2026-02-15T18:10:56.543Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PAK_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PAK_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS PAK DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40401,
+      "sha256": "740228864925893f4d4d833d8618429086e5c6c3d37c897a1f354d943236fd8a",
+      "capturedAtUtc": "2026-02-15T18:10:57.911Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_PAK_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/PAK_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS PAK DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37458,
+      "sha256": "6387f8fc6a63a3cb2c16bff52776aef5110e6e46d5c5498a37392a1d10e29401",
+      "capturedAtUtc": "2026-02-15T18:10:59.285Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_BGD_DT.TDS.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/BGD_DT.TDS.DECT.EX.ZS.json",
+      "description": "World Bank IDS BGD DT.TDS.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 39520,
+      "sha256": "52633e21c922ac34416d4e423926961798fb3a4b1955dab0d0da5cd91da7e521",
+      "capturedAtUtc": "2026-02-15T18:11:00.661Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_BGD_DT.INT.DECT.EX.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/BGD_DT.INT.DECT.EX.ZS.json",
+      "description": "World Bank IDS BGD DT.INT.DECT.EX.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 40527,
+      "sha256": "68ceb330d66800f95ded2170a454074cc78671aeb2de420a37e807bf28d280fb",
+      "capturedAtUtc": "2026-02-15T18:11:02.037Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "WB_BGD_DT.CUR.USDL.ZS_CACHE",
+      "sourceId": "WB_IDS",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/worldbank/BGD_DT.CUR.USDL.ZS.json",
+      "description": "World Bank IDS BGD DT.CUR.USDL.ZS cached JSON used",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 37580,
+      "sha256": "45bb4bdce3a3a15a3951054669edc4f342f3a21d8fcdc2aaa67f7f75aee937cf",
+      "capturedAtUtc": "2026-02-15T18:11:03.414Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "IMF_SDMX_DATAFLOW_CACHE",
+      "sourceId": "IMF_COFER",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/imf/sdmx-dataflow.xml",
+      "description": "IMF resource cache used https://api.imf.org/external/sdmx/2.1/dataflow",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 169592,
+      "sha256": "56f4be207f1ea4b5b825042f662a96a630da76ea4ab3c51580fcb55eab2d22e9",
+      "capturedAtUtc": "2026-02-15T18:11:04.788Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "IMF_DATAMAPPER_COFER_CACHE",
+      "sourceId": "IMF_COFER",
+      "category": "raw-api-cache",
+      "localPath": "data/raw/imf/datamapper-cofer.json",
+      "description": "IMF resource cache used https://www.imf.org/external/datamapper/api/v1/COFER_USD",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 46,
+      "sha256": "e7532f93e8716977332fc49e9680d0770d524ee2c39ba6c7842e535f4443efef",
+      "capturedAtUtc": "2026-02-15T18:11:06.212Z",
+      "extra": {
+        "cached": true,
+        "reason": "fetch failed"
+      }
+    },
+    {
+      "id": "IMF_COFER_FALLBACK",
+      "sourceId": "IMF_COFER",
+      "category": "raw-reference",
+      "localPath": "data/raw/imf/cofer-fallback.json",
+      "description": "Fallback COFER series used when IMF API access is restricted",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 748,
+      "sha256": "d2e05d5f2a8d273d8c6b348b4288ce5a4766e9807f58667a33afd0f9e7052fd3",
+      "capturedAtUtc": "2026-02-15T18:11:06.214Z",
+      "extra": null
+    },
+    {
+      "id": "SNAPSHOT_BIS_CBPOL",
+      "sourceId": "BIS_CBPOL",
+      "category": "transformed-snapshot",
+      "localPath": "public/assets/data/bis-cbpol.json",
+      "description": "Transformed snapshot for BIS_CBPOL",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 6236,
+      "sha256": "17a08e098f3b59678647637411d52d53e11a327e403d54a2fdd21082d8200960",
+      "capturedAtUtc": "2026-02-16T01:49:25.608Z",
+      "extra": {
+        "asOfUtc": "2026-02-16T01:49:25.608Z",
+        "transformVersion": "1.1.0"
+      }
+    },
+    {
+      "id": "SNAPSHOT_BIS_GLI",
+      "sourceId": "BIS_GLI",
+      "category": "transformed-snapshot",
+      "localPath": "public/assets/data/bis-gli.json",
+      "description": "Transformed snapshot for BIS_GLI",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 1244,
+      "sha256": "629412f58bf75d3072a7b7d6501da8f67805129f32594f34dbfb275f77cbda89",
+      "capturedAtUtc": "2026-02-16T01:49:25.608Z",
+      "extra": {
+        "asOfUtc": "2026-02-16T01:49:25.608Z",
+        "transformVersion": "1.1.0"
+      }
+    },
+    {
+      "id": "SNAPSHOT_WB_IDS",
+      "sourceId": "WB_IDS",
+      "category": "transformed-snapshot",
+      "localPath": "public/assets/data/wb-ids.json",
+      "description": "Transformed snapshot for WB_IDS",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 14464,
+      "sha256": "940bf42f893efbed9a5660852696f64e9371e5a9374b95386461b063495c2518",
+      "capturedAtUtc": "2026-02-16T01:49:25.608Z",
+      "extra": {
+        "asOfUtc": "2026-02-16T01:49:25.608Z",
+        "transformVersion": "1.1.0"
+      }
+    },
+    {
+      "id": "SNAPSHOT_IMF_COFER",
+      "sourceId": "IMF_COFER",
+      "category": "transformed-snapshot",
+      "localPath": "public/assets/data/imf-cofer.json",
+      "description": "Transformed snapshot for IMF_COFER",
+      "status": "ok",
+      "error": null,
+      "sizeBytes": 1023,
+      "sha256": "f3876c20fe8e355e22348e59d1f6edd8ed275c1288ccd887cf9ca6e50a01c6a1",
+      "capturedAtUtc": "2026-02-16T01:49:25.608Z",
+      "extra": {
+        "asOfUtc": "2026-02-16T01:49:25.608Z",
+        "transformVersion": "1.1.0"
+      }
+    }
+  ],
+  "api_health": {
+    "started_at_utc": "2026-02-15T18:09:36.106Z",
+    "finished_at_utc": "2026-02-15T18:09:36.456Z",
+    "checks": [
+      {
+        "id": "BIS_CBPOL_ZIP",
+        "url": "https://data.bis.org/static/bulk/WS_CBPOL_csv_col.zip",
+        "ok": true,
+        "status": null,
+        "statusText": "Local cache available",
+        "elapsedMs": 169,
+        "contentType": null,
+        "checkedAtUtc": "2026-02-15T18:09:36.277Z",
+        "error": "fetch failed"
+      },
+      {
+        "id": "BIS_GLI_ZIP",
+        "url": "https://data.bis.org/static/bulk/WS_GLI_csv_col.zip",
+        "ok": true,
+        "status": null,
+        "statusText": "Local cache available",
+        "elapsedMs": 3,
+        "contentType": null,
+        "checkedAtUtc": "2026-02-15T18:09:36.280Z",
+        "error": "fetch failed"
+      },
+      {
+        "id": "WB_IDS_SAMPLE",
+        "url": "https://api.worldbank.org/v2/sources/6/country/BRA/counterpart-area/WLD/series/DT.TDS.DECT.EX.ZS/data?format=json&per_page=5",
+        "ok": true,
+        "status": null,
+        "statusText": "Local cache available",
+        "elapsedMs": 65,
+        "contentType": null,
+        "checkedAtUtc": "2026-02-15T18:09:36.345Z",
+        "error": "fetch failed"
+      },
+      {
+        "id": "IMF_SDMX_21",
+        "url": "https://api.imf.org/external/sdmx/2.1/dataflow",
+        "ok": true,
+        "status": null,
+        "statusText": "Local cache available",
+        "elapsedMs": 3,
+        "contentType": null,
+        "checkedAtUtc": "2026-02-15T18:09:36.348Z",
+        "error": "fetch failed"
+      },
+      {
+        "id": "IMF_DATAMAPPER_COFER",
+        "url": "https://www.imf.org/external/datamapper/api/v1/COFER_USD",
+        "ok": true,
+        "status": null,
+        "statusText": "Local cache available",
+        "elapsedMs": 108,
+        "contentType": null,
+        "checkedAtUtc": "2026-02-15T18:09:36.456Z",
+        "error": "fetch failed"
+      }
+    ]
+  },
+  "sections": {
+    "hero": {
+      "kpis": [
+        {
+          "id": "kpi-hikes",
+          "label": "Central banks hiking (latest quarter)",
+          "value": 0,
+          "unit": "banks",
+          "source_ids": [
+            "BIS_CBPOL"
+          ]
+        },
+        {
+          "id": "kpi-median-change",
+          "label": "Median policy-rate change",
+          "value": 0,
+          "unit": "pp",
+          "source_ids": [
+            "BIS_CBPOL"
+          ]
+        },
+        {
+          "id": "kpi-dispersion",
+          "label": "Tightening dispersion (IQR)",
+          "value": 0,
+          "unit": "pp",
+          "source_ids": [
+            "BIS_CBPOL"
+          ]
+        }
+      ]
+    },
+    "global_sync": {
+      "periods": [
+        "2021-Q2",
+        "2021-Q3",
+        "2021-Q4",
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4",
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4",
+        "2024-Q1",
+        "2024-Q2",
+        "2024-Q3",
+        "2024-Q4",
+        "2025-Q1",
+        "2025-Q2",
+        "2025-Q3",
+        "2025-Q4",
+        "2026-Q1"
+      ],
+      "banks": [
+        "Serbia",
+        "Russia",
+        "Romania",
+        "Philippines",
+        "Poland",
+        "New Zealand",
+        "Peru",
+        "South Africa",
+        "United States",
+        "Euro area",
+        "Thailand",
+        "Türkiye",
+        "Sweden",
+        "Brazil",
+        "China",
+        "Colombia",
+        "Switzerland",
+        "Chile",
+        "Canada",
+        "Hong Kong SAR",
+        "United Kingdom",
+        "Denmark",
+        "Czechia",
+        "Japan",
+        "Iceland",
+        "Israel",
+        "Hungary",
+        "Australia",
+        "Norway",
+        "Mexico",
+        "Malaysia",
+        "Morocco",
+        "North Macedonia",
+        "Kuwait",
+        "Saudi Arabia",
+        "India"
+      ],
+      "heatmap_matrix": [
+        [
+          1,
+          1,
+          1,
+          1,
+          2.5,
+          3.5,
+          5,
+          5.75,
+          6.25,
+          6.5,
+          6.5,
+          6.5,
+          6.25,
+          5.75,
+          5.75,
+          5.75,
+          5.75,
+          5.75,
+          5.75,
+          5.75
+        ],
+        [
+          5.5,
+          6.75,
+          8.5,
+          20,
+          9.5,
+          7.5,
+          7.5,
+          7.5,
+          7.5,
+          13,
+          16,
+          16,
+          16,
+          19,
+          21,
+          21,
+          20,
+          17,
+          16,
+          16
+        ],
+        [
+          1.25,
+          1.25,
+          1.75,
+          2.5,
+          3.75,
+          5.5,
+          6.75,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5
+        ],
+        [
+          2,
+          2,
+          2,
+          2,
+          2.5,
+          4.25,
+          5.5,
+          6.25,
+          6.25,
+          6.25,
+          6.5,
+          6.5,
+          6.5,
+          6.25,
+          5.75,
+          5.75,
+          5.25,
+          5,
+          4.5,
+          4.5
+        ],
+        [
+          0.1,
+          0.1,
+          1.75,
+          3.5,
+          6,
+          6.75,
+          6.75,
+          6.75,
+          6.75,
+          6,
+          5.75,
+          5.75,
+          5.75,
+          5.75,
+          5.75,
+          5.75,
+          5.25,
+          4.75,
+          4,
+          4
+        ],
+        [
+          0.25,
+          0.25,
+          0.75,
+          1,
+          2,
+          3,
+          4.25,
+          4.75,
+          5.5,
+          5.5,
+          5.5,
+          5.5,
+          5.5,
+          5.25,
+          4.25,
+          3.75,
+          3.25,
+          3,
+          2.25,
+          2.25
+        ],
+        [
+          0.25,
+          1,
+          2.5,
+          4,
+          5.5,
+          6.75,
+          7.5,
+          7.75,
+          7.75,
+          7.5,
+          6.75,
+          6.25,
+          5.75,
+          5.25,
+          5,
+          4.75,
+          4.5,
+          4.25,
+          4.25,
+          4.25
+        ],
+        [
+          3.5,
+          3.5,
+          3.75,
+          4.25,
+          4.75,
+          6.25,
+          7,
+          7.75,
+          8.25,
+          8.25,
+          8.25,
+          8.25,
+          8.25,
+          8,
+          7.75,
+          7.5,
+          7.25,
+          7,
+          6.75,
+          6.75
+        ],
+        [
+          0.125,
+          0.125,
+          0.125,
+          0.375,
+          1.625,
+          3.125,
+          4.375,
+          4.875,
+          5.125,
+          5.375,
+          5.375,
+          5.375,
+          5.375,
+          4.875,
+          4.375,
+          4.375,
+          4.375,
+          4.125,
+          3.625,
+          3.625
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1.25,
+          2.5,
+          3.5,
+          4,
+          4.5,
+          4.5,
+          4.5,
+          4.25,
+          3.5,
+          3,
+          2.5,
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          1,
+          1.25,
+          1.75,
+          2,
+          2.5,
+          2.5,
+          2.5,
+          2.5,
+          2.5,
+          2.25,
+          2,
+          1.75,
+          1.5,
+          1.25,
+          1.25
+        ],
+        [
+          19,
+          18,
+          14,
+          14,
+          14,
+          12,
+          9,
+          8.5,
+          15,
+          30,
+          42.5,
+          50,
+          50,
+          50,
+          47.5,
+          42.5,
+          46,
+          40.5,
+          38,
+          37
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0.25,
+          1.75,
+          2.5,
+          3,
+          3.5,
+          4,
+          4,
+          4,
+          3.75,
+          3.5,
+          2.75,
+          2.25,
+          2,
+          2,
+          1.75,
+          1.75
+        ],
+        [
+          4.25,
+          6.25,
+          9.25,
+          11.75,
+          13.25,
+          13.75,
+          13.75,
+          13.75,
+          13.75,
+          12.75,
+          11.75,
+          10.75,
+          10.5,
+          10.75,
+          12.25,
+          14.25,
+          15,
+          15,
+          15,
+          15
+        ],
+        [
+          3.85,
+          3.85,
+          3.8,
+          3.7,
+          3.7,
+          3.65,
+          3.65,
+          3.65,
+          3.55,
+          3.45,
+          3.45,
+          3.45,
+          3.45,
+          3.35,
+          3.1,
+          3.1,
+          3,
+          3,
+          3,
+          3
+        ],
+        [
+          1.75,
+          1.75,
+          3,
+          4,
+          6,
+          10,
+          12,
+          13,
+          13.25,
+          13.25,
+          13,
+          12.25,
+          11.75,
+          10.75,
+          9.5,
+          9.5,
+          9.25,
+          9.25,
+          9.25,
+          9.25
+        ],
+        [
+          -0.75,
+          -0.75,
+          -0.75,
+          -0.75,
+          -0.25,
+          0.5,
+          1,
+          1.5,
+          1.75,
+          1.75,
+          1.75,
+          1.5,
+          1.25,
+          1,
+          0.5,
+          0.25,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0.5,
+          1.5,
+          4,
+          7,
+          9,
+          10.75,
+          11.25,
+          11.25,
+          11.25,
+          9.5,
+          8.25,
+          7.25,
+          5.75,
+          5.5,
+          5,
+          5,
+          5,
+          4.75,
+          4.5,
+          4.5
+        ],
+        [
+          0.25,
+          0.25,
+          0.25,
+          0.5,
+          1.5,
+          3.25,
+          4.25,
+          4.5,
+          4.75,
+          5,
+          5,
+          5,
+          4.75,
+          4.25,
+          3.25,
+          2.75,
+          2.75,
+          2.5,
+          2.25,
+          2.25
+        ],
+        [
+          0.5,
+          0.5,
+          0.5,
+          0.75,
+          2,
+          3.5,
+          4.75,
+          5.25,
+          5.5,
+          5.75,
+          5.75,
+          5.75,
+          5.75,
+          5.25,
+          4.75,
+          4.75,
+          4.75,
+          4.5,
+          4,
+          4
+        ],
+        [
+          0.1,
+          0.1,
+          0.25,
+          0.75,
+          1.25,
+          2.25,
+          3.5,
+          4.25,
+          5,
+          5.25,
+          5.25,
+          5.25,
+          5.25,
+          5,
+          4.75,
+          4.5,
+          4.25,
+          4,
+          3.75,
+          3.75
+        ],
+        [
+          -0.5,
+          -0.5,
+          -0.6,
+          -0.6,
+          -0.6,
+          0.65,
+          1.75,
+          2.6,
+          3.1,
+          3.6,
+          3.6,
+          3.6,
+          3.35,
+          3.1,
+          2.6,
+          2.1,
+          1.6,
+          1.6,
+          1.6,
+          1.6
+        ],
+        [
+          0.5,
+          0.75,
+          3.75,
+          4.5,
+          7,
+          7,
+          7,
+          7,
+          7,
+          7,
+          6.75,
+          5.75,
+          4.75,
+          4.25,
+          4,
+          3.75,
+          3.5,
+          3.5,
+          3.5,
+          3.5
+        ],
+        [
+          -0.1,
+          -0.1,
+          -0.1,
+          -0.1,
+          -0.1,
+          -0.1,
+          -0.1,
+          -0.1,
+          -0.1,
+          -0.1,
+          -0.1,
+          0.05,
+          0.05,
+          0.25,
+          0.25,
+          0.5,
+          0.5,
+          0.5,
+          0.75,
+          0.75
+        ],
+        [
+          1,
+          1.25,
+          2,
+          2.75,
+          4.75,
+          5.5,
+          6,
+          7.5,
+          8.75,
+          9.25,
+          9.25,
+          9.25,
+          9.25,
+          9.25,
+          8.5,
+          7.75,
+          7.5,
+          7.5,
+          7.25,
+          7.25
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.75,
+          2,
+          3.25,
+          4.25,
+          4.75,
+          4.75,
+          4.75,
+          4.5,
+          4.5,
+          4.5,
+          4.5,
+          4.5,
+          4.5,
+          4.5,
+          4.25,
+          4
+        ],
+        [
+          0.9,
+          1.65,
+          2.4,
+          4.4,
+          7.75,
+          13,
+          13,
+          13,
+          13,
+          13,
+          10.75,
+          8.25,
+          7,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.85,
+          2.35,
+          3.1,
+          3.6,
+          4.1,
+          4.1,
+          4.35,
+          4.35,
+          4.35,
+          4.35,
+          4.35,
+          4.1,
+          3.85,
+          3.6,
+          3.6,
+          3.6
+        ],
+        [
+          0,
+          0.25,
+          0.5,
+          0.75,
+          1.25,
+          2.25,
+          2.75,
+          3,
+          3.75,
+          4.25,
+          4.5,
+          4.5,
+          4.5,
+          4.5,
+          4.5,
+          4.5,
+          4.25,
+          4,
+          4,
+          4
+        ],
+        [
+          4.25,
+          4.5,
+          5.5,
+          6.5,
+          7.75,
+          9.25,
+          10.5,
+          11.25,
+          11.25,
+          11.25,
+          11.25,
+          11,
+          11,
+          10.5,
+          10,
+          9,
+          8,
+          7.5,
+          7,
+          7
+        ],
+        [
+          1.75,
+          1.75,
+          1.75,
+          1.75,
+          2,
+          2.5,
+          2.75,
+          2.75,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2.75,
+          2.75,
+          2.75
+        ],
+        [
+          1.5,
+          1.5,
+          1.5,
+          1.5,
+          1.5,
+          2,
+          2.5,
+          3,
+          3,
+          3,
+          3,
+          3,
+          2.75,
+          2.75,
+          2.5,
+          2.25,
+          2.25,
+          2.25,
+          2.25,
+          2.25
+        ],
+        [
+          1.25,
+          1.25,
+          1.25,
+          1.25,
+          2,
+          3,
+          4.75,
+          5.5,
+          6,
+          6.3,
+          6.3,
+          6.3,
+          6.3,
+          6.05,
+          5.55,
+          5.35,
+          5.35,
+          5.35,
+          4,
+          4
+        ],
+        [
+          1.5,
+          1.5,
+          1.5,
+          1.75,
+          2.25,
+          3,
+          3.5,
+          4,
+          4,
+          4.25,
+          4.25,
+          4.25,
+          4.25,
+          4,
+          4,
+          4,
+          4,
+          3.75,
+          3.5,
+          3.5
+        ],
+        [
+          1,
+          1,
+          1,
+          1.25,
+          2.25,
+          3.75,
+          5,
+          5.5,
+          5.75,
+          6,
+          6,
+          6,
+          6,
+          5.5,
+          5,
+          5,
+          5,
+          4.75,
+          4.25,
+          null
+        ],
+        [
+          4,
+          4,
+          4,
+          4,
+          4.9,
+          5.9,
+          6.25,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.5,
+          6.25,
+          5.5,
+          5.5,
+          5.25,
+          null
+        ]
+      ],
+      "tsi": [
+        {
+          "period": "2021-Q3",
+          "hikingShare": 25,
+          "cuttingShare": 2.8,
+          "dispersion": 0.06,
+          "hikes": 9,
+          "cuts": 1,
+          "tracked": 36
+        },
+        {
+          "period": "2021-Q4",
+          "hikingShare": 41.7,
+          "cuttingShare": 8.3,
+          "dispersion": 0.75,
+          "hikes": 15,
+          "cuts": 3,
+          "tracked": 36
+        },
+        {
+          "period": "2022-Q1",
+          "hikingShare": 55.6,
+          "cuttingShare": 2.8,
+          "dispersion": 0.75,
+          "hikes": 20,
+          "cuts": 1,
+          "tracked": 36
+        },
+        {
+          "period": "2022-Q2",
+          "hikingShare": 77.8,
+          "cuttingShare": 2.8,
+          "dispersion": 1.06,
+          "hikes": 28,
+          "cuts": 1,
+          "tracked": 36
+        },
+        {
+          "period": "2022-Q3",
+          "hikingShare": 86.1,
+          "cuttingShare": 8.3,
+          "dispersion": 0.81,
+          "hikes": 31,
+          "cuts": 3,
+          "tracked": 36
+        },
+        {
+          "period": "2022-Q4",
+          "hikingShare": 77.8,
+          "cuttingShare": 2.8,
+          "dispersion": 1,
+          "hikes": 28,
+          "cuts": 1,
+          "tracked": 36
+        },
+        {
+          "period": "2023-Q1",
+          "hikingShare": 72.2,
+          "cuttingShare": 2.8,
+          "dispersion": 0.75,
+          "hikes": 26,
+          "cuts": 1,
+          "tracked": 36
+        },
+        {
+          "period": "2023-Q2",
+          "hikingShare": 58.3,
+          "cuttingShare": 2.8,
+          "dispersion": 0.5,
+          "hikes": 21,
+          "cuts": 1,
+          "tracked": 36
+        },
+        {
+          "period": "2023-Q3",
+          "hikingShare": 44.4,
+          "cuttingShare": 13.9,
+          "dispersion": 0.26,
+          "hikes": 16,
+          "cuts": 5,
+          "tracked": 36
+        },
+        {
+          "period": "2023-Q4",
+          "hikingShare": 13.9,
+          "cuttingShare": 19.4,
+          "dispersion": 0,
+          "hikes": 5,
+          "cuts": 7,
+          "tracked": 36
+        },
+        {
+          "period": "2024-Q1",
+          "hikingShare": 5.6,
+          "cuttingShare": 25,
+          "dispersion": 0.06,
+          "hikes": 2,
+          "cuts": 9,
+          "tracked": 36
+        },
+        {
+          "period": "2024-Q2",
+          "hikingShare": 0,
+          "cuttingShare": 36.1,
+          "dispersion": 0.25,
+          "hikes": 0,
+          "cuts": 13,
+          "tracked": 36
+        },
+        {
+          "period": "2024-Q3",
+          "hikingShare": 8.3,
+          "cuttingShare": 63.9,
+          "dispersion": 0.5,
+          "hikes": 3,
+          "cuts": 23,
+          "tracked": 36
+        },
+        {
+          "period": "2024-Q4",
+          "hikingShare": 5.6,
+          "cuttingShare": 63.9,
+          "dispersion": 0.5,
+          "hikes": 2,
+          "cuts": 23,
+          "tracked": 36
+        },
+        {
+          "period": "2025-Q1",
+          "hikingShare": 5.6,
+          "cuttingShare": 50,
+          "dispersion": 0.25,
+          "hikes": 2,
+          "cuts": 18,
+          "tracked": 36
+        },
+        {
+          "period": "2025-Q2",
+          "hikingShare": 5.6,
+          "cuttingShare": 55.6,
+          "dispersion": 0.25,
+          "hikes": 2,
+          "cuts": 20,
+          "tracked": 36
+        },
+        {
+          "period": "2025-Q3",
+          "hikingShare": 0,
+          "cuttingShare": 52.8,
+          "dispersion": 0.25,
+          "hikes": 0,
+          "cuts": 19,
+          "tracked": 36
+        },
+        {
+          "period": "2025-Q4",
+          "hikingShare": 2.8,
+          "cuttingShare": 55.6,
+          "dispersion": 0.5,
+          "hikes": 1,
+          "cuts": 20,
+          "tracked": 36
+        },
+        {
+          "period": "2026-Q1",
+          "hikingShare": 0,
+          "cuttingShare": 5.9,
+          "dispersion": 0,
+          "hikes": 0,
+          "cuts": 2,
+          "tracked": 34
+        }
+      ],
+      "source_ids": [
+        "BIS_CBPOL"
+      ]
+    },
+    "liquidity_channel": {
+      "periods": [
+        "2019-Q4",
+        "2020-Q1",
+        "2020-Q2",
+        "2020-Q3",
+        "2020-Q4",
+        "2021-Q1",
+        "2021-Q2",
+        "2021-Q3",
+        "2021-Q4",
+        "2022-Q1",
+        "2022-Q2",
+        "2022-Q3",
+        "2022-Q4",
+        "2023-Q1",
+        "2023-Q2",
+        "2023-Q3",
+        "2023-Q4",
+        "2024-Q1",
+        "2024-Q2",
+        "2024-Q3",
+        "2024-Q4",
+        "2025-Q1",
+        "2025-Q2",
+        "2025-Q3"
+      ],
+      "usd_index": [
+        100,
+        102.42,
+        104.46,
+        104.36,
+        104.38,
+        107.22,
+        108.73,
+        110.94,
+        111.89,
+        111.13,
+        111.36,
+        109.39,
+        107.16,
+        106.96,
+        106.44,
+        105.37,
+        105.55,
+        107.14,
+        107.41,
+        107.78,
+        107.79,
+        109.8,
+        111.66,
+        112.64
+      ],
+      "eur_index": [
+        100,
+        102.21,
+        102.25,
+        101.9,
+        103.06,
+        104.34,
+        104.87,
+        106.2,
+        106.79,
+        102.05,
+        104.2,
+        106.77,
+        105.91,
+        105.96,
+        104.62,
+        105.06,
+        105.02,
+        108.19,
+        109.89,
+        110.21,
+        113.62,
+        117.18,
+        118.85,
+        123.49
+      ],
+      "jpy_index": [
+        100,
+        106.93,
+        109.74,
+        99.43,
+        98.46,
+        87.81,
+        82.92,
+        80.8,
+        78.68,
+        79.84,
+        80.03,
+        78.05,
+        87.12,
+        91.99,
+        97.67,
+        92.4,
+        105.01,
+        104.1,
+        114.93,
+        111.22,
+        106.41,
+        113.03,
+        112.87,
+        108.89
+      ],
+      "sankey": {
+        "nodes": [
+          {
+            "name": "Policy Tightening"
+          },
+          {
+            "name": "USD Funding Channel"
+          },
+          {
+            "name": "Cross-Border Credit"
+          },
+          {
+            "name": "Debt Service Pressure"
+          },
+          {
+            "name": "External Vulnerability"
+          }
+        ],
+        "links": [
+          {
+            "source": "Policy Tightening",
+            "target": "USD Funding Channel",
+            "value": 5
+          },
+          {
+            "source": "USD Funding Channel",
+            "target": "Cross-Border Credit",
+            "value": 9.15
+          },
+          {
+            "source": "Cross-Border Credit",
+            "target": "Debt Service Pressure",
+            "value": 33.83
+          },
+          {
+            "source": "Debt Service Pressure",
+            "target": "External Vulnerability",
+            "value": 24.81
+          }
+        ]
+      },
+      "source_ids": [
+        "BIS_GLI",
+        "WB_IDS",
+        "BIS_CBPOL"
+      ]
+    },
+    "country_stress": {
+      "years": [
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "countries": [
+        {
+          "iso3": "BRA",
+          "name": "Brazil",
+          "region": "Latin America",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            15.7314132277102,
+            28.0671181416749,
+            22.9484422129242,
+            39.7792835988014,
+            51.0549755813973,
+            34.7679526864763,
+            33.3094436850684,
+            53.4702774123798,
+            50.3521091588437,
+            46.7278546984627,
+            29.9040449782556,
+            53.5434238618458,
+            26.7439339145718
+          ],
+          "interestPayments": [
+            5.14939064558493,
+            6.27880285799976,
+            6.34997018415872,
+            8.19223497024003,
+            9.90140620337814,
+            7.20110340602121,
+            7.32858524160229,
+            9.99038444173991,
+            7.83226871412397,
+            8.54528878030248,
+            4.65755312300507,
+            7.11999337000633,
+            7.14230388576306
+          ],
+          "usdDebtShare": [
+            87.5387,
+            90.5636,
+            92.28,
+            93.586,
+            94.1059,
+            95.6633,
+            96.4142,
+            96.0385,
+            95.8307,
+            96.5655,
+            96.2274,
+            95.7752,
+            96.5341
+          ]
+        },
+        {
+          "iso3": "MEX",
+          "name": "Mexico",
+          "region": "Latin America",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            17.1456461494288,
+            9.3849710528046,
+            10.6971771895414,
+            12.5387170111518,
+            18.8534358233458,
+            14.2819574213038,
+            11.6218684544373,
+            13.3021139066279,
+            15.7359205334234,
+            14.4748436269398,
+            8.6120372079918,
+            8.14585545015927,
+            9.51997025016336
+          ],
+          "interestPayments": [
+            8.41952637902073,
+            4.56988356189556,
+            3.98353170790421,
+            4.90242171816015,
+            4.64429357521232,
+            5.95480267941839,
+            5.17166284287334,
+            4.98759990228901,
+            5.19553500391003,
+            4.28163511165894,
+            3.23681235811778,
+            3.93484757407566,
+            3.39361616230152
+          ],
+          "usdDebtShare": [
+            91.3415,
+            91.2817,
+            91.0691,
+            89.6578,
+            87.5257,
+            85.6037,
+            84.5042,
+            84.7481,
+            85.1069,
+            85.5531,
+            87.7052,
+            89.0364,
+            89.2769
+          ]
+        },
+        {
+          "iso3": "COL",
+          "name": "Colombia",
+          "region": "Latin America",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            21.0684942260461,
+            13.9153892415626,
+            21.6439488946711,
+            27.5983642105443,
+            33.1505406754278,
+            40.907772512707,
+            40.7847562687225,
+            32.9649350870865,
+            50.7683360157448,
+            44.6185424127,
+            33.8039730673688,
+            36.7182409709799,
+            42.9975933296769
+          ],
+          "interestPayments": [
+            5.49273362979861,
+            5.43864523670929,
+            6.70140144679673,
+            9.92380215370635,
+            11.2123545654079,
+            11.0952661778272,
+            10.964612638731,
+            12.2490604603167,
+            15.5543177407924,
+            12.3648970375825,
+            9.30801718700595,
+            12.328336031272,
+            13.7229970631119
+          ],
+          "usdDebtShare": [
+            96.636,
+            97.5508,
+            96.9865,
+            97.3762,
+            95.394,
+            94.563,
+            92.7433,
+            93.8402,
+            93.7345,
+            93.9948,
+            93.7685,
+            94.0146,
+            94.587
+          ]
+        },
+        {
+          "iso3": "PER",
+          "name": "Peru",
+          "region": "Latin America",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            12.3226244268819,
+            15.1258791033336,
+            11.9309556405536,
+            13.4038093050334,
+            17.7041857117146,
+            20.9074646015518,
+            12.7448359503715,
+            14.1234150873743,
+            17.0530258562388,
+            13.6711087401445,
+            9.58728638721785,
+            17.1091113712622,
+            17.1119312052217
+          ],
+          "interestPayments": [
+            6.69573962449237,
+            4.09735501068952,
+            4.56449937934628,
+            5.60350824308862,
+            5.14532868092932,
+            4.52170358636325,
+            4.76333986158405,
+            4.25973841487553,
+            4.7246645562208,
+            3.6664176532167,
+            4.99240529684863,
+            6.58728507654967,
+            5.66991453622729
+          ],
+          "usdDebtShare": [
+            85.713,
+            86.3472,
+            89.938,
+            86.4198,
+            82.1056,
+            81.5608,
+            82.4268,
+            82.9849,
+            87.2628,
+            87.2874,
+            88.3261,
+            87.4022,
+            88.575
+          ]
+        },
+        {
+          "iso3": "ARG",
+          "name": "Argentina",
+          "region": "Latin America",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            14.0666784016831,
+            17.1373193031257,
+            20.1695819933804,
+            24.7334756900606,
+            34.9280137137276,
+            51.7299119817311,
+            51.5482584868275,
+            50.832791702386,
+            43.0972641723579,
+            30.6022646249006,
+            31.6825901735881,
+            51.3619830543826,
+            38.2533536654791
+          ],
+          "interestPayments": [
+            3.93452868709001,
+            4.35802580433412,
+            8.61117965860474,
+            9.78412157185023,
+            19.193418830853,
+            19.0912809112777,
+            17.7414233412559,
+            16.2502046873163,
+            11.3203751091253,
+            6.58994652671761,
+            6.60514242968806,
+            14.0793801917125,
+            12.3243534806674
+          ],
+          "usdDebtShare": [
+            67.3642,
+            66.4294,
+            69.7059,
+            69.6136,
+            66.6769,
+            67.577,
+            71.6773,
+            73.6518,
+            89.3057,
+            90.7743,
+            91.6197,
+            92.0223,
+            92.8091
+          ]
+        },
+        {
+          "iso3": "ZAF",
+          "name": "South Africa",
+          "region": "Africa",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            8.59885489485278,
+            11.2130810024538,
+            8.56574794473972,
+            25.9905721005608,
+            14.7939893799428,
+            13.4781054057055,
+            24.3318090898163,
+            18.7330823475481,
+            27.2658396660534,
+            18.7244983079101,
+            18.6241594461537,
+            16.5005264998453,
+            16.300535727928
+          ],
+          "interestPayments": [
+            3.80155619277777,
+            3.53546832471604,
+            4.24505979983582,
+            6.19359288051531,
+            6.53024254907056,
+            5.64510981381139,
+            6.17613857632127,
+            6.67179909058315,
+            7.06027058710732,
+            4.79807592878912,
+            4.57061585365937,
+            5.47869169500566,
+            5.89709731044198
+          ],
+          "usdDebtShare": [
+            88.9748,
+            91.7194,
+            90.7962,
+            90.5421,
+            93.7383,
+            93.8825,
+            94.3259,
+            95.065,
+            95.0469,
+            95.9112,
+            95.916,
+            95.311,
+            94.3574
+          ]
+        },
+        {
+          "iso3": "EGY",
+          "name": "Egypt, Arab Rep.",
+          "region": "Africa",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            6.64052009640903,
+            7.63717373471107,
+            12.6738497850725,
+            9.98733957183104,
+            19.5115368004423,
+            15.3775515850977,
+            16.3223660797798,
+            16.58038796421,
+            30.61957277854,
+            31.0941269796866,
+            23.1349293420531,
+            30.3910889570483,
+            49.2291017973666
+          ],
+          "interestPayments": [
+            2.02442682476819,
+            1.82156079921408,
+            1.82791001355437,
+            2.35763776658244,
+            4.49157728363405,
+            4.75629113193745,
+            5.31380661252451,
+            7.64098699744014,
+            10.406433184763,
+            7.89961465305256,
+            7.91420057310344,
+            13.442875939026,
+            14.6917368906681
+          ],
+          "usdDebtShare": [
+            40.9076,
+            57.7264,
+            58.6718,
+            68.0424,
+            67.6482,
+            67.2522,
+            67.0297,
+            68.2542,
+            68.2049,
+            69.8397,
+            71.2185,
+            70.0601,
+            67.8153
+          ]
+        },
+        {
+          "iso3": "NGA",
+          "name": "Nigeria",
+          "region": "Africa",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            0.852085183786854,
+            1.04636319695474,
+            2.74426131040126,
+            4.78478331470269,
+            12.8052870950151,
+            7.4017208088628,
+            8.45834340479672,
+            9.23927603720408,
+            13.0926169889832,
+            15.1109687776838,
+            12.0372694275022,
+            15.3919195720427,
+            21.9135766141912
+          ],
+          "interestPayments": [
+            0.541475462973237,
+            0.821704481046336,
+            0.823744342296526,
+            1.64888970254802,
+            2.3932774220244,
+            2.67146317245287,
+            2.990903531119,
+            3.34226643485825,
+            5.28794955797995,
+            4.0303022720015,
+            4.90642385966648,
+            7.34869719594361,
+            7.94023368474005
+          ],
+          "usdDebtShare": [
+            77.6369,
+            78.1462,
+            81.9101,
+            80.6432,
+            82.3527,
+            84.2251,
+            87.6572,
+            88.1076,
+            83.909,
+            86.5532,
+            86.5456,
+            87.2917,
+            84.0151
+          ]
+        },
+        {
+          "iso3": "MAR",
+          "name": "Morocco",
+          "region": "Africa",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            10.9736870036953,
+            15.8587772705737,
+            12.9466515206553,
+            10.5762551692244,
+            11.0788252872274,
+            10.1033609468872,
+            9.28560361990773,
+            9.53426255528164,
+            13.8428032596205,
+            13.8056895646823,
+            10.1164827473821,
+            9.20347207035798,
+            12.9254798325863
+          ],
+          "interestPayments": [
+            2.53034006454971,
+            3.78039811768695,
+            2.91637249889647,
+            3.26270935160043,
+            3.51489338039191,
+            3.00666805093396,
+            2.84233849682797,
+            2.80503023413996,
+            3.24199632595182,
+            2.86951420239807,
+            2.72687151693975,
+            3.53108138575506,
+            3.48609610978094
+          ],
+          "usdDebtShare": [
+            19.7366,
+            24.5693,
+            29.7941,
+            33.0492,
+            34.5995,
+            33.8464,
+            34.8367,
+            34.1537,
+            39.5286,
+            42.54,
+            41.5209,
+            44.6459,
+            48.3074
+          ]
+        },
+        {
+          "iso3": "KEN",
+          "name": "Kenya",
+          "region": "Africa",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            4.6495039960247,
+            4.73075851407227,
+            11.362004823099,
+            8.33004713955533,
+            11.1736382993382,
+            14.5974443871521,
+            23.6995062707777,
+            38.427302443419,
+            24.2889288609468,
+            16.7806362225923,
+            18.1305777110906,
+            21.1131036239564,
+            27.2238636965006
+          ],
+          "interestPayments": [
+            1.51135533947463,
+            1.50760679595966,
+            2.75016347391806,
+            3.76854468589343,
+            5.20561946277358,
+            6.78386956443035,
+            9.15416550489459,
+            11.3651557966611,
+            10.5655185367828,
+            6.73510350545984,
+            6.81137242029869,
+            8.98757085216527,
+            8.41049293319989
+          ],
+          "usdDebtShare": [
+            48.656,
+            49.8924,
+            64.0337,
+            68.3498,
+            69.5564,
+            73.4196,
+            74.2888,
+            76.0835,
+            74.8649,
+            75.3505,
+            74.8816,
+            73.3525,
+            74.0564
+          ]
+        },
+        {
+          "iso3": "TUR",
+          "name": "Turkiye",
+          "region": "Europe and Central Asia",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            26.771512062507,
+            27.1626121370026,
+            23.8539286016856,
+            25.3789734982834,
+            36.4254391256231,
+            37.362997807429,
+            33.4794771797331,
+            33.2432164759356,
+            40.7367712535302,
+            25.3396609190239,
+            19.6812294560508,
+            20.909547158823,
+            23.4318472180701
+          ],
+          "interestPayments": [
+            6.64587320449144,
+            7.01094815649006,
+            6.99937396327241,
+            6.28885674359382,
+            6.7823751597956,
+            7.30547752531845,
+            6.1612739175568,
+            6.43528646325289,
+            8.2080319633901,
+            5.65573087690764,
+            5.06323209277631,
+            6.24929313939749,
+            6.91851086240769
+          ],
+          "usdDebtShare": [
+            66.7863,
+            66.0602,
+            67.9176,
+            69.3159,
+            69.7656,
+            69.0774,
+            69.1291,
+            71.0583,
+            73.5417,
+            76.8624,
+            78.6957,
+            79.8199,
+            78.5901
+          ]
+        },
+        {
+          "iso3": "UKR",
+          "name": "Ukraine",
+          "region": "Europe and Central Asia",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            31.3501569139298,
+            42.2986617537939,
+            29.7064947502784,
+            55.3903722878765,
+            23.4340184931092,
+            20.8974535213248,
+            20.7824682176434,
+            18.15621515478,
+            23.8730939460794,
+            15.1765354256544,
+            13.4199145151841,
+            12.2100768825083,
+            15.8316705792772
+          ],
+          "interestPayments": [
+            5.11147684234706,
+            6.54668291587511,
+            7.8152504368542,
+            8.32432684946317,
+            7.01895935705238,
+            5.95791547382393,
+            5.26437897793166,
+            5.21826745403443,
+            5.29221155930576,
+            4.31591674136126,
+            3.74293752271248,
+            4.70857698990503,
+            6.03012972882291
+          ],
+          "usdDebtShare": [
+            64.1233,
+            76.4293,
+            76.0714,
+            79.5291,
+            81.5215,
+            78.7469,
+            79.5874,
+            75.7544,
+            69.72,
+            71.393,
+            55.9793,
+            43.8986,
+            43.3755
+          ]
+        },
+        {
+          "iso3": "IND",
+          "name": "India",
+          "region": "South Asia",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            6.71426990966754,
+            8.08000121217609,
+            18.6296205367074,
+            11.2063688175425,
+            17.2634154874596,
+            10.0846800379296,
+            11.3976479343618,
+            9.0023457004643,
+            15.0538331069002,
+            7.81076067172717,
+            8.26658065989597,
+            10.1619274745821,
+            10.4936117766169
+          ],
+          "interestPayments": [
+            2.03023450861115,
+            2.04174167629642,
+            2.41458891517593,
+            2.45735299652417,
+            2.46898583674756,
+            2.47236946145576,
+            3.11911378010339,
+            2.8970673634318,
+            2.54741229056938,
+            2.01441606197548,
+            2.3048394978575,
+            3.81019268874577,
+            3.9917869075187
+          ],
+          "usdDebtShare": [
+            76.29,
+            78.8102,
+            82.9123,
+            83.9362,
+            82.4292,
+            83.7631,
+            82.5341,
+            82.5722,
+            80.7564,
+            82.0703,
+            81.687,
+            81.2043,
+            81.9121
+          ]
+        },
+        {
+          "iso3": "IDN",
+          "name": "Indonesia",
+          "region": "East Asia and Pacific",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            17.4300331593941,
+            19.9652408135031,
+            29.917390542463,
+            34.6071560879119,
+            37.4796669814765,
+            29.4361720648722,
+            25.1358200297316,
+            39.4859892619538,
+            36.8192512440417,
+            26.2187506302203,
+            23.3261822398195,
+            20.2824087016026,
+            24.6905963826299
+          ],
+          "interestPayments": [
+            2.98627651466185,
+            3.99380726185016,
+            4.43324498703982,
+            9.8423441012799,
+            6.15139617482521,
+            5.96947936050416,
+            5.75428283471562,
+            6.52926811573002,
+            8.16017221045491,
+            4.43502163260343,
+            4.30989362121862,
+            5.49219161343862,
+            5.88785987180658
+          ],
+          "usdDebtShare": [
+            69.9855,
+            75.2354,
+            80.7026,
+            83.1936,
+            83.5428,
+            84.7817,
+            86.1325,
+            88.4375,
+            87.8472,
+            89.5203,
+            90.0805,
+            90.1745,
+            88.9274
+          ]
+        },
+        {
+          "iso3": "PHL",
+          "name": "Philippines",
+          "region": "East Asia and Pacific",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            9.19352041351369,
+            8.58889328223271,
+            9.66555272727776,
+            19.1512281746249,
+            12.9944484232303,
+            12.4646447866367,
+            9.71339861972156,
+            9.7553895298585,
+            10.7204055958742,
+            12.1801119870228,
+            8.58795403356421,
+            12.2623165097884,
+            14.433157563278
+          ],
+          "interestPayments": [
+            4.32878253658003,
+            3.93165563710306,
+            3.89031994983842,
+            6.26300864964627,
+            3.82529333480021,
+            3.04318757396521,
+            2.79616264861973,
+            2.93996772894492,
+            3.22350986286596,
+            2.7842172502327,
+            2.975469274242,
+            4.2095926797799,
+            4.77955573415608
+          ],
+          "usdDebtShare": [
+            63.1745,
+            65.4089,
+            70.8216,
+            72.3436,
+            71.4383,
+            72.2151,
+            70.192,
+            67.205,
+            72.9799,
+            73.0524,
+            76.537,
+            79.7484,
+            82.2372
+          ]
+        },
+        {
+          "iso3": "THA",
+          "name": "Thailand",
+          "region": "East Asia and Pacific",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            5.46420221127501,
+            5.13266012228009,
+            9.49240265953916,
+            7.0924610814782,
+            5.26222601022932,
+            5.10277997834366,
+            5.99264645814319,
+            9.62119078657852,
+            8.30746607492233,
+            5.24497072327639,
+            7.94092618155616,
+            11.9644494874884,
+            4.68434832872581
+          ],
+          "interestPayments": [
+            0.741672852378069,
+            0.484956895522239,
+            0.565933555981631,
+            0.571799858537069,
+            0.915898606364552,
+            0.791064605433411,
+            0.985061949608265,
+            0.950260413853752,
+            0.906229941699603,
+            0.514446630718226,
+            1.2828982480948,
+            1.9868386436641,
+            1.77463413710255
+          ],
+          "usdDebtShare": [
+            78.8416,
+            82.9491,
+            83.5913,
+            82.0734,
+            82.2359,
+            85.9745,
+            89.9208,
+            92.0564,
+            90.6395,
+            92.0872,
+            92.3544,
+            92.7897,
+            93.8788
+          ]
+        },
+        {
+          "iso3": "VNM",
+          "name": "Viet Nam",
+          "region": "East Asia and Pacific",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            3.61229378375559,
+            3.18606302452735,
+            4.23766383028915,
+            3.93021313872606,
+            4.06868318587895,
+            6.28582677474731,
+            7.26567450189829,
+            6.0937874484832,
+            5.86707620715429,
+            6.06864858953762,
+            6.76588446873016,
+            7.54231510337596,
+            7.72326875884348
+          ],
+          "interestPayments": [
+            0.952313967690937,
+            0.869919749482604,
+            0.885304452975048,
+            1.03772334423549,
+            0.952612643268628,
+            1.21420576733906,
+            1.41202404482848,
+            1.28659857501687,
+            0.93357581069544,
+            0.563312687858391,
+            0.703933252615065,
+            1.48987815614815,
+            1.11659516831638
+          ],
+          "usdDebtShare": [
+            52.9568,
+            57.1183,
+            60.5529,
+            61.181,
+            60.1809,
+            59.8402,
+            59.6124,
+            58.966,
+            56.9486,
+            58.1531,
+            59.7782,
+            59.3853,
+            58.9454
+          ]
+        },
+        {
+          "iso3": "PAK",
+          "name": "Pakistan",
+          "region": "South Asia",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            15.4974439085818,
+            22.786054796032,
+            15.5835259640491,
+            14.4750575188818,
+            15.800860805807,
+            22.5558039612655,
+            19.455512353704,
+            35.633204290599,
+            39.5201173442251,
+            33.9308182903944,
+            42.0463406568737,
+            43.5994922043878,
+            39.5425844195386
+          ],
+          "interestPayments": [
+            2.96193046991834,
+            2.77695796621268,
+            2.65014488327224,
+            3.84225506681248,
+            4.88241763648463,
+            6.0366376277176,
+            8.19946492440389,
+            9.69579091849948,
+            9.0829620192538,
+            6.55369950245572,
+            8.84788202198727,
+            13.7199356084193,
+            13.2852723289208
+          ],
+          "usdDebtShare": [
+            51.7214,
+            55.07,
+            61.1485,
+            63.898,
+            65.2928,
+            69.9877,
+            73.9304,
+            74.0023,
+            75.5022,
+            78.8505,
+            81.4388,
+            83.5328,
+            83.6332
+          ]
+        },
+        {
+          "iso3": "BGD",
+          "name": "Bangladesh",
+          "region": "South Asia",
+          "years": [
+            2012,
+            2013,
+            2014,
+            2015,
+            2016,
+            2017,
+            2018,
+            2019,
+            2020,
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "debtService": [
+            6.03570025042511,
+            6.11014310075419,
+            6.13466573895137,
+            5.00105961552124,
+            4.92101273972835,
+            5.79903429874665,
+            6.79539373258512,
+            13.1445525906638,
+            10.4592111139286,
+            11.4417559557247,
+            11.2392162165619,
+            12.5939799449972,
+            15.7658301164336
+          ],
+          "interestPayments": [
+            1.20380025933731,
+            1.144819463417,
+            1.24322778621763,
+            1.19217099742928,
+            1.36119710359729,
+            2.02931698583496,
+            2.11195960779677,
+            2.5241372814415,
+            2.70925902975516,
+            2.20539069342233,
+            2.47865974328205,
+            4.50556168719971,
+            6.22741612737732
+          ],
+          "usdDebtShare": [
+            56.7371,
+            58.5797,
+            61.6635,
+            62.8298,
+            63.7322,
+            63.8128,
+            65.6405,
+            66.2167,
+            66.1145,
+            68.7406,
+            70.3119,
+            71.301,
+            72.2549
+          ]
+        }
+      ],
+      "top_stress_latest": [
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "region": "Latin America",
+          "year": 2024,
+          "debtService": 42.9975933296769,
+          "usdDebtShare": 94.587,
+          "interestPayments": 13.7229970631119,
+          "stressScore": 63.63
+        },
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "region": "Latin America",
+          "year": 2024,
+          "debtService": 38.2533536654791,
+          "usdDebtShare": 92.8091,
+          "interestPayments": 12.3243534806674,
+          "stressScore": 60.08
+        },
+        {
+          "iso3": "PAK",
+          "country": "Pakistan",
+          "region": "South Asia",
+          "year": 2024,
+          "debtService": 39.5425844195386,
+          "usdDebtShare": 83.6332,
+          "interestPayments": 13.2852723289208,
+          "stressScore": 57.18
+        },
+        {
+          "iso3": "EGY",
+          "country": "Egypt, Arab Rep.",
+          "region": "Africa",
+          "year": 2024,
+          "debtService": 49.2291017973666,
+          "usdDebtShare": 67.8153,
+          "interestPayments": 14.6917368906681,
+          "stressScore": 56.66
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brazil",
+          "region": "Latin America",
+          "year": 2024,
+          "debtService": 26.7439339145718,
+          "usdDebtShare": 96.5341,
+          "interestPayments": 7.14230388576306,
+          "stressScore": 54.66
+        },
+        {
+          "iso3": "IDN",
+          "country": "Indonesia",
+          "region": "East Asia and Pacific",
+          "year": 2024,
+          "debtService": 24.6905963826299,
+          "usdDebtShare": 88.9274,
+          "interestPayments": 5.88785987180658,
+          "stressScore": 50.39
+        },
+        {
+          "iso3": "ZAF",
+          "country": "South Africa",
+          "region": "Africa",
+          "year": 2024,
+          "debtService": 16.300535727928,
+          "usdDebtShare": 94.3574,
+          "interestPayments": 5.89709731044198,
+          "stressScore": 47.52
+        },
+        {
+          "iso3": "NGA",
+          "country": "Nigeria",
+          "region": "Africa",
+          "year": 2024,
+          "debtService": 21.9135766141912,
+          "usdDebtShare": 84.0151,
+          "interestPayments": 7.94023368474005,
+          "stressScore": 46.75
+        },
+        {
+          "iso3": "KEN",
+          "country": "Kenya",
+          "region": "Africa",
+          "year": 2024,
+          "debtService": 27.2238636965006,
+          "usdDebtShare": 74.0564,
+          "interestPayments": 8.41049293319989,
+          "stressScore": 45.96
+        },
+        {
+          "iso3": "PER",
+          "country": "Peru",
+          "region": "Latin America",
+          "year": 2024,
+          "debtService": 17.1119312052217,
+          "usdDebtShare": 88.575,
+          "interestPayments": 5.66991453622729,
+          "stressScore": 45.7
+        }
+      ],
+      "source_ids": [
+        "WB_IDS"
+      ]
+    },
+    "dominant_currency": {
+      "cofer_usd_share": [
+        {
+          "period": "2016-Q4",
+          "value": 65.4
+        },
+        {
+          "period": "2017-Q4",
+          "value": 62.7
+        },
+        {
+          "period": "2018-Q4",
+          "value": 61.7
+        },
+        {
+          "period": "2019-Q4",
+          "value": 60.7
+        },
+        {
+          "period": "2020-Q4",
+          "value": 59
+        },
+        {
+          "period": "2021-Q4",
+          "value": 58.8
+        },
+        {
+          "period": "2022-Q4",
+          "value": 58.4
+        },
+        {
+          "period": "2023-Q4",
+          "value": 58.4
+        },
+        {
+          "period": "2024-Q4",
+          "value": 57.8
+        },
+        {
+          "period": "2025-Q3",
+          "value": 57.2
+        }
+      ],
+      "latest_cofer_usd_share": 57.2,
+      "methodology_breaks": [
+        {
+          "period": "2025-Q3",
+          "note": "COFER publication revision removed unallocated reserves from published tables."
+        }
+      ],
+      "country_exposure": [
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "usd_debt_share": 94.587,
+          "debt_service_ratio": 42.9975933296769,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "usd_debt_share": 92.8091,
+          "debt_service_ratio": 38.2533536654791,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "PAK",
+          "country": "Pakistan",
+          "usd_debt_share": 83.6332,
+          "debt_service_ratio": 39.5425844195386,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "EGY",
+          "country": "Egypt, Arab Rep.",
+          "usd_debt_share": 67.8153,
+          "debt_service_ratio": 49.2291017973666,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brazil",
+          "usd_debt_share": 96.5341,
+          "debt_service_ratio": 26.7439339145718,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "IDN",
+          "country": "Indonesia",
+          "usd_debt_share": 88.9274,
+          "debt_service_ratio": 24.6905963826299,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "ZAF",
+          "country": "South Africa",
+          "usd_debt_share": 94.3574,
+          "debt_service_ratio": 16.300535727928,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "NGA",
+          "country": "Nigeria",
+          "usd_debt_share": 84.0151,
+          "debt_service_ratio": 21.9135766141912,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "KEN",
+          "country": "Kenya",
+          "usd_debt_share": 74.0564,
+          "debt_service_ratio": 27.2238636965006,
+          "reserve_reference": 57.2
+        },
+        {
+          "iso3": "PER",
+          "country": "Peru",
+          "usd_debt_share": 88.575,
+          "debt_service_ratio": 17.1119312052217,
+          "reserve_reference": 57.2
+        }
+      ],
+      "source_ids": [
+        "IMF_COFER",
+        "WB_IDS",
+        "DCP"
+      ]
+    },
+    "currency_network": {
+      "source_ids": [
+        "BIS_GLI",
+        "DCP"
+      ],
+      "nodes": [
+        {
+          "id": "USD",
+          "group": "Core",
+          "weight": 112.64
+        },
+        {
+          "id": "EUR",
+          "group": "Core",
+          "weight": 123.49
+        },
+        {
+          "id": "JPY",
+          "group": "Core",
+          "weight": 108.89
+        },
+        {
+          "id": "GBP",
+          "group": "Bridge",
+          "weight": 88
+        },
+        {
+          "id": "CNY",
+          "group": "Bridge",
+          "weight": 82
+        },
+        {
+          "id": "EM FX Basket",
+          "group": "Periphery",
+          "weight": 70
+        }
+      ],
+      "links": [
+        {
+          "source": "USD",
+          "target": "EUR",
+          "weight": 18
+        },
+        {
+          "source": "USD",
+          "target": "JPY",
+          "weight": 15
+        },
+        {
+          "source": "USD",
+          "target": "GBP",
+          "weight": 12
+        },
+        {
+          "source": "USD",
+          "target": "CNY",
+          "weight": 10
+        },
+        {
+          "source": "USD",
+          "target": "EM FX Basket",
+          "weight": 24
+        },
+        {
+          "source": "EUR",
+          "target": "EM FX Basket",
+          "weight": 9
+        },
+        {
+          "source": "JPY",
+          "target": "EM FX Basket",
+          "weight": 7
+        },
+        {
+          "source": "GBP",
+          "target": "EM FX Basket",
+          "weight": 5
+        },
+        {
+          "source": "CNY",
+          "target": "EM FX Basket",
+          "weight": 6
+        }
+      ]
+    },
+    "simulator": {
+      "baseline": [
+        {
+          "iso3": "COL",
+          "country": "Colombia",
+          "region": "Latin America",
+          "year": 2024,
+          "debtService": 42.9975933296769,
+          "usdDebtShare": 94.587,
+          "interestPayments": 13.7229970631119,
+          "stressScore": 63.63
+        },
+        {
+          "iso3": "ARG",
+          "country": "Argentina",
+          "region": "Latin America",
+          "year": 2024,
+          "debtService": 38.2533536654791,
+          "usdDebtShare": 92.8091,
+          "interestPayments": 12.3243534806674,
+          "stressScore": 60.08
+        },
+        {
+          "iso3": "PAK",
+          "country": "Pakistan",
+          "region": "South Asia",
+          "year": 2024,
+          "debtService": 39.5425844195386,
+          "usdDebtShare": 83.6332,
+          "interestPayments": 13.2852723289208,
+          "stressScore": 57.18
+        },
+        {
+          "iso3": "EGY",
+          "country": "Egypt, Arab Rep.",
+          "region": "Africa",
+          "year": 2024,
+          "debtService": 49.2291017973666,
+          "usdDebtShare": 67.8153,
+          "interestPayments": 14.6917368906681,
+          "stressScore": 56.66
+        },
+        {
+          "iso3": "BRA",
+          "country": "Brazil",
+          "region": "Latin America",
+          "year": 2024,
+          "debtService": 26.7439339145718,
+          "usdDebtShare": 96.5341,
+          "interestPayments": 7.14230388576306,
+          "stressScore": 54.66
+        },
+        {
+          "iso3": "IDN",
+          "country": "Indonesia",
+          "region": "East Asia and Pacific",
+          "year": 2024,
+          "debtService": 24.6905963826299,
+          "usdDebtShare": 88.9274,
+          "interestPayments": 5.88785987180658,
+          "stressScore": 50.39
+        },
+        {
+          "iso3": "ZAF",
+          "country": "South Africa",
+          "region": "Africa",
+          "year": 2024,
+          "debtService": 16.300535727928,
+          "usdDebtShare": 94.3574,
+          "interestPayments": 5.89709731044198,
+          "stressScore": 47.52
+        },
+        {
+          "iso3": "NGA",
+          "country": "Nigeria",
+          "region": "Africa",
+          "year": 2024,
+          "debtService": 21.9135766141912,
+          "usdDebtShare": 84.0151,
+          "interestPayments": 7.94023368474005,
+          "stressScore": 46.75
+        },
+        {
+          "iso3": "KEN",
+          "country": "Kenya",
+          "region": "Africa",
+          "year": 2024,
+          "debtService": 27.2238636965006,
+          "usdDebtShare": 74.0564,
+          "interestPayments": 8.41049293319989,
+          "stressScore": 45.96
+        },
+        {
+          "iso3": "PER",
+          "country": "Peru",
+          "region": "Latin America",
+          "year": 2024,
+          "debtService": 17.1119312052217,
+          "usdDebtShare": 88.575,
+          "interestPayments": 5.66991453622729,
+          "stressScore": 45.7
+        }
+      ],
+      "explanation": "Vulnerability score combines USD debt share, debt-service burden, and GLI-based liquidity pressure.",
+      "source_ids": [
+        "WB_IDS",
+        "BIS_GLI"
+      ]
+    }
+  },
+  "dataset_lineage": [
+    {
+      "dataset_id": "BIS_CBPOL",
+      "as_of_utc": "2026-02-16T01:49:25.608Z",
+      "source": {
+        "publisher": "Bank for International Settlements",
+        "method": "local_raw_csv",
+        "citation_url": "https://data.bis.org/bulkdownload",
+        "license_notes": "BIS copyright and terms of use apply."
+      },
+      "raw_hash_sha256": "72c08fffe74c8b32223744bedf13425dfac404faa93435a8dd8b1b3db7ccbb89",
+      "transform_version": "1.1.0",
+      "raw_local_path": "data/raw/bis/WS_CBPOL_csv_col.csv"
+    },
+    {
+      "dataset_id": "BIS_GLI",
+      "as_of_utc": "2026-02-16T01:49:25.608Z",
+      "source": {
+        "publisher": "Bank for International Settlements",
+        "method": "local_raw_csv",
+        "citation_url": "https://data.bis.org/bulkdownload",
+        "license_notes": "BIS copyright and terms of use apply."
+      },
+      "raw_hash_sha256": "5eb242e97ac6bc90a0dd9f1a021ab1bd1f7d9f0d60c2181500c508e39d7f2cd2",
+      "transform_version": "1.1.0",
+      "raw_local_path": "data/raw/bis/WS_GLI_csv_col.csv"
+    },
+    {
+      "dataset_id": "WB_IDS",
+      "as_of_utc": "2026-02-16T01:49:25.608Z",
+      "source": {
+        "publisher": "World Bank",
+        "method": "local_raw_json_plus_api_fallback",
+        "citation_url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation",
+        "license_notes": "World Bank open data terms apply."
+      },
+      "raw_hash_sha256": "1b00b3c0336b1e2f564cb6ecc73d7408ff50f8aa17c7e9a3b7e14b5dd9539bbc",
+      "transform_version": "1.1.0",
+      "raw_local_path": null
+    },
+    {
+      "dataset_id": "IMF_COFER",
+      "as_of_utc": "2026-02-16T01:49:25.608Z",
+      "source": {
+        "publisher": "International Monetary Fund",
+        "method": "local_raw_reference",
+        "citation_url": "https://data.imf.org/en/Resource-Pages/IMF-API",
+        "license_notes": "IMF terms of use apply."
+      },
+      "raw_hash_sha256": "d2e05d5f2a8d273d8c6b348b4288ce5a4766e9807f58667a33afd0f9e7052fd3",
+      "transform_version": "1.1.0",
+      "raw_local_path": "data/raw/imf/cofer-fallback.json"
+    }
+  ],
+  "checksums": {
+    "atlas_sha256": "732b9a110af360853ae1e6d562312b9f9aeca0145bfcc6161a1af585d1006b1a",
+    "artifacts_sha256": "aea18e4d0c01b60404b4ff7caa18508c47cc0e23389064b0e4b32cce98787976"
+  }
+}

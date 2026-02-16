@@ -1,0 +1,28 @@
+.network-shell {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border, #1e1e38);
+  background: rgba(20, 20, 37, 0.82);
+}
+
+.network-shell h3 {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  color: #ede8e0;
+}
+
+.network-shell p {
+  margin: 0.2rem 0 0;
+  color: #8a8580;
+}
+
+.network-canvas {
+  width: 100%;
+  min-height: clamp(16rem, 38vw, 28rem);
+  border-radius: 0.5rem;
+  background: radial-gradient(circle at top left, rgba(0, 201, 167, 0.1), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(201, 168, 76, 0.08), transparent 55%),
+    #0a0a18;
+}
